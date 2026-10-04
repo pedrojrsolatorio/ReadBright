@@ -179,6 +179,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + TABLE_USERS + " SET " + COL_STARS + " = " + COL_STARS + " + ? WHERE " + COL_USERNAME + "=?", new Object[]{amount, username});
     }
 
+    public int getStars(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + COL_STARS + " FROM " + TABLE_USERS + " WHERE " + COL_USERNAME + "=?", new String[]{username});
+        int stars = 0;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                stars = cursor.getInt(cursor.getColumnIndexOrThrow(COL_STARS));
+            }
+            cursor.close();
+        }
+        return stars;
+    }
+
     public boolean updateUserGrade(String username, String newGrade) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues v = new ContentValues();

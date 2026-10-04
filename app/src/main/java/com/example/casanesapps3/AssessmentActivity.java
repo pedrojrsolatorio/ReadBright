@@ -251,6 +251,7 @@ public class AssessmentActivity extends AppCompatActivity {
 
     private void initializeSpeechRecognizer() {
         if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            if (speechRecognizer != null) speechRecognizer.destroy();
             speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
             recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -258,7 +259,11 @@ public class AssessmentActivity extends AppCompatActivity {
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override public void onReadyForSpeech(Bundle params) { tvReadingStatus.setText(R.string.listening_status); tvReadingStatus.setTextColor(Color.BLUE); }
                 @Override public void onEndOfSpeech() { tvReadingStatus.setText(R.string.processing); }
-                @Override public void onError(int error) { tvReadingStatus.setText(R.string.try_again_status); tvReadingStatus.setTextColor(Color.RED); }
+                @Override public void onError(int error) { 
+                    tvReadingStatus.setText(R.string.try_again_status); 
+                    tvReadingStatus.setTextColor(Color.RED); 
+                    if (speechRecognizer != null) speechRecognizer.cancel();
+                }
                 @Override public void onResults(Bundle results) {
                     ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (matches != null && !matches.isEmpty()) {
@@ -277,7 +282,25 @@ public class AssessmentActivity extends AppCompatActivity {
     }
 
     private void startListening() {
-        if (speechRecognizer != null) speechRecognizer.startListening(recognizerIntent);
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            Toast.makeText(this, "Speech recognition is not available on this device", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (speechRecognizer == null) {
+            initializeSpeechRecognizer();
+        }
+        if (speechRecognizer != null) {
+            speechRecognizer.cancel();
+            speechRecognizer.startListening(recognizerIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startListening();
+        }
     }
 
     private void saveScoreAndGoToResults() {

@@ -167,6 +167,7 @@ public class AlphabetActivity extends AppCompatActivity {
 
     private void initializeSpeechRecognizer() {
         if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            if (speechRecognizer != null) speechRecognizer.destroy();
             speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
             recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -174,7 +175,10 @@ public class AlphabetActivity extends AppCompatActivity {
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override public void onReadyForSpeech(Bundle params) { if (tvFeedback != null) { tvFeedback.setText(getString(R.string.listening_status)); tvFeedback.setTextColor(Color.BLUE); } }
                 @Override public void onEndOfSpeech() { if (tvFeedback != null) { tvFeedback.setText(getString(R.string.analyzing_status)); tvFeedback.setTextColor(Color.GRAY); } }
-                @Override public void onError(int error) { if (tvFeedback != null) { tvFeedback.setText(getString(R.string.try_again_status)); tvFeedback.setTextColor(Color.RED); } }
+                @Override public void onError(int error) { 
+                    if (tvFeedback != null) { tvFeedback.setText(getString(R.string.try_again_status)); tvFeedback.setTextColor(Color.RED); } 
+                    if (speechRecognizer != null) speechRecognizer.cancel();
+                }
                 @Override public void onResults(Bundle results) {
                     ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                     if (matches != null && !matches.isEmpty()) checkPronunciation(matches.get(0).toUpperCase());
@@ -188,7 +192,19 @@ public class AlphabetActivity extends AppCompatActivity {
         }
     }
 
-    private void startListening() { if (speechRecognizer != null) speechRecognizer.startListening(recognizerIntent); }
+    private void startListening() { 
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            Toast.makeText(this, "Speech recognition is not available on this device", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (speechRecognizer == null) {
+            initializeSpeechRecognizer();
+        }
+        if (speechRecognizer != null) {
+            speechRecognizer.cancel();
+            speechRecognizer.startListening(recognizerIntent);
+        }
+    }
 
     private void checkPronunciation(String spokenText) {
         if (alphabet == null || alphabet.isEmpty()) return;
@@ -200,6 +216,8 @@ public class AlphabetActivity extends AppCompatActivity {
             }
             // Save to history
             alphabetEngine.markCompleted(target);
+
+            ConfettiView.show(this, textToSpeech);
 
             // Auto advance
             tvFeedback.postDelayed(() -> {

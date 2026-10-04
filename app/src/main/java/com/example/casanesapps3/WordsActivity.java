@@ -1,7 +1,9 @@
 package com.example.casanesapps3;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,12 +17,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class WordsActivity extends AppCompatActivity {
+
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private TextView tvWord, tvFeedback;
     private Button btnSpeak, btnMic, btnPrevious, btnNext, btnBack;
@@ -83,8 +91,10 @@ public class WordsActivity extends AppCompatActivity {
         });
 
         btnMic.setOnClickListener(v -> {
-            if (speechRecognizer != null) {
-                speechRecognizer.startListening(recognizerIntent);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
+            } else {
+                startListening();
             }
         });
 
@@ -131,27 +141,56 @@ public class WordsActivity extends AppCompatActivity {
     }
 
     private void initializeSpeechRecognizer() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US);
+        if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            if (speechRecognizer != null) speechRecognizer.destroy();
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US);
 
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override public void onReadyForSpeech(Bundle params) { tvFeedback.setText(R.string.listening_status); tvFeedback.setTextColor(Color.BLUE); }
-            @Override public void onEndOfSpeech() {}
-            @Override public void onError(int error) { tvFeedback.setText(R.string.try_again_status); tvFeedback.setTextColor(Color.RED); }
-            @Override public void onResults(Bundle results) {
-                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                if (matches != null && !matches.isEmpty()) {
-                    checkSpokenWord(matches.get(0));
+            speechRecognizer.setRecognitionListener(new RecognitionListener() {
+                @Override public void onReadyForSpeech(Bundle params) { tvFeedback.setText(R.string.listening_status); tvFeedback.setTextColor(Color.BLUE); }
+                @Override public void onEndOfSpeech() {}
+                @Override public void onError(int error) { 
+                    tvFeedback.setText(R.string.try_again_status); 
+                    tvFeedback.setTextColor(Color.RED); 
+                    if (speechRecognizer != null) speechRecognizer.cancel();
                 }
-            }
-            @Override public void onBeginningOfSpeech() {}
-            @Override public void onRmsChanged(float rmsdB) {}
-            @Override public void onBufferReceived(byte[] buffer) {}
-            @Override public void onPartialResults(Bundle partialResults) {}
-            @Override public void onEvent(int eventType, Bundle params) {}
-        });
+                @Override public void onResults(Bundle results) {
+                    ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    if (matches != null && !matches.isEmpty()) {
+                        checkSpokenWord(matches.get(0));
+                    }
+                }
+                @Override public void onBeginningOfSpeech() {}
+                @Override public void onRmsChanged(float rmsdB) {}
+                @Override public void onBufferReceived(byte[] buffer) {}
+                @Override public void onPartialResults(Bundle partialResults) {}
+                @Override public void onEvent(int eventType, Bundle params) {}
+            });
+        }
+    }
+
+    private void startListening() {
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            Toast.makeText(this, "Speech recognition is not available on this device", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (speechRecognizer == null) {
+            initializeSpeechRecognizer();
+        }
+        if (speechRecognizer != null) {
+            speechRecognizer.cancel();
+            speechRecognizer.startListening(recognizerIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startListening();
+        }
     }
 
     private void checkSpokenWord(String spokenText) {

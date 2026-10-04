@@ -243,33 +243,59 @@ public class SpellingActivity extends AppCompatActivity {
         textToSpeech.setLanguage(Locale.US);
     }
 
-    private void startVoiceTyping() { if (speechRecognizer != null) speechRecognizer.startListening(recognizerIntent); }
+    private void startVoiceTyping() { 
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            Toast.makeText(this, "Speech recognition is not available on this device", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (speechRecognizer == null) {
+            initializeSpeechRecognizer();
+        }
+        if (speechRecognizer != null) {
+            speechRecognizer.cancel();
+            speechRecognizer.startListening(recognizerIntent);
+        }
+    }
 
     private void initializeSpeechRecognizer() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US);
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override public void onReadyForSpeech(Bundle params) { tvFeedback.setText("Listening..."); }
-            @Override public void onResults(Bundle results) {
-                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                if (matches != null && !matches.isEmpty()) {
-                    String spoken = matches.get(0).toUpperCase().trim();
-                    if (spoken.equals(currentTargetWord)) {
-                        for (int i = 0; i < currentTargetWord.length(); i++) userGuess[i] = currentTargetWord.charAt(i);
-                        renderAnswerSlots(); checkAnswer();
+        if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            if (speechRecognizer != null) speechRecognizer.destroy();
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US);
+            speechRecognizer.setRecognitionListener(new RecognitionListener() {
+                @Override public void onReadyForSpeech(Bundle params) { tvFeedback.setText("Listening..."); }
+                @Override public void onResults(Bundle results) {
+                    ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                    if (matches != null && !matches.isEmpty()) {
+                        String spoken = matches.get(0).toUpperCase().trim();
+                        if (spoken.equals(currentTargetWord)) {
+                            for (int i = 0; i < currentTargetWord.length(); i++) userGuess[i] = currentTargetWord.charAt(i);
+                            renderAnswerSlots(); checkAnswer();
+                        }
                     }
                 }
-            }
-            @Override public void onError(int error) { tvFeedback.setText("Try again!"); }
-            @Override public void onBeginningOfSpeech() {}
-            @Override public void onRmsChanged(float rmsdB) {}
-            @Override public void onBufferReceived(byte[] buffer) {}
-            @Override public void onEndOfSpeech() {}
-            @Override public void onPartialResults(Bundle partialResults) {}
-            @Override public void onEvent(int eventType, Bundle params) {}
-        });
+                @Override public void onError(int error) { 
+                    tvFeedback.setText("Try again!"); 
+                    if (speechRecognizer != null) speechRecognizer.cancel();
+                }
+                @Override public void onBeginningOfSpeech() {}
+                @Override public void onRmsChanged(float rmsdB) {}
+                @Override public void onBufferReceived(byte[] buffer) {}
+                @Override public void onEndOfSpeech() {}
+                @Override public void onPartialResults(Bundle partialResults) {}
+                @Override public void onEvent(int eventType, Bundle params) {}
+            });
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startVoiceTyping();
+        }
     }
 
     private int dpToPx(int dp) { return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics()); }
