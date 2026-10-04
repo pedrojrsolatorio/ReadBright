@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AI Voice Settings"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#1B5E20"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speech Speed"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgDialogSpeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <RadioButton android:id="@+id/rbDialogSlow" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Slow"/>
+        <RadioButton android:id="@+id/rbDialogMod" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Moderate" android:checked="true"/>
+        <RadioButton android:id="@+id/rbDialogFast" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Fast"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voice Accent"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgDialogAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <RadioButton android:id="@+id/rbDialogFil" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Filipino"/>
+        <RadioButton android:id="@+id/rbDialogUS" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="US (Default)" android:checked="true"/>
+        <RadioButton android:id="@+id/rbDialogUK" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="UK"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSaveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Save &amp; Close"
+        android:textAllCaps="false"
+        android:backgroundTint="#2E7D32"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>

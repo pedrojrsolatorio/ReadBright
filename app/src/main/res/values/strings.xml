@@ -1,0 +1,180 @@
+<resources>
+    <string name="app_name">casanesapps3</string>
+
+    <!-- Shared -->
+    <string name="back">Back</string>
+    <string name="logout">Logout</string>
+    <string name="previous_icon">⬅ Previous</string>
+    <string name="next_icon">Next ➡</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="back_to_dashboard">Back to Dashboard</string>
+    <string name="grade_level">Grade Level</string>
+    <string name="grade_level_label">Grade Level: %1$s</string>
+    <string name="stars_count">⭐ %1$d Stars</string>
+    <string name="stars_label"> Stars</string>
+    <string name="stars_icon">⭐</string>
+    <string name="mic_icon">🎤</string>
+    <string name="listening_status">Listening...</string>
+    <string name="analyzing_status">Analyzing...</string>
+    <string name="try_again_status">Try again!</string>
+    <string name="excellent_status">Excellent! ⭐</string>
+    <string name="perfect_said">Perfect! You said: %1$s ⭐</string>
+    <string name="you_said_status">You said: %1$s</string>
+    <string name="spoken_text_label">You said: %1$s</string>
+    <string name="not_quite_said">Not quite. You said: %1$s. Listen carefully:</string>
+    <string name="module_completed_msg">Module Completed! ⭐ +50 Stars</string>
+    <string name="default_grade">Grade 1</string>
+    <string name="tap_mic_speak">Tap the mic and speak</string>
+    <string name="processing">Processing...</string>
+    <string name="didnt_catch_that">Didn\'t catch that. Try again.</string>
+    <string name="mic_permission_required">Microphone permission required</string>
+    <string name="not_quite_listen_label">Not quite. Listen:</string>
+    <string name="almost_there">Almost there! Try again.</string>
+    <string name="settings_saved">Settings Saved!</string>
+    <string name="login_welcome">Welcome %1$s (%2$s)</string>
+    <string name="not_student_account">This is not a Student account</string>
+    <string name="not_parent_account">This is not a Parent account</string>
+    <string name="invalid_credentials">Invalid Username or Password</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="fill_all_fields">Please fill all fields</string>
+    <string name="verify_identity">Verify</string>
+    <string name="cancel">Cancel</string>
+    <string name="password_recovered_title">Password Recovered</string>
+    <string name="password_recovered_msg">Hi %1$s,\n\nYour password is: %2$s</string>
+    <string name="user_not_found">Username not found. Please register first.</string>
+    <string name="verification_failed">Verification failed. Account not found or name mismatch.</string>
+    <string name="start_journey">Start your learning journey today!</string>
+    <string name="mascot">Mascot</string>
+    <string name="welcome">Welcome</string>
+    <string name="na">N/A</string>
+
+    <!-- AI Encouragement -->
+    <string name="encouragement_1">Great job!</string>
+    <string name="encouragement_2">Correct!</string>
+    <string name="encouragement_3">Well done!</string>
+    <string name="encouragement_4">Excellent!</string>
+    <string name="encouragement_5">Perfect!</string>
+
+    <!-- UI Elements Custom Labels -->
+    <string name="take_assessment_btn">🏆 Take Assessment Test</string>
+    <string name="ai_voice_settings_btn">⚙️ AI Voice Settings</string>
+    <string name="logout_session_btn">Logout Session</string>
+    <string name="back_to_home_btn">Back to Home</string>
+
+    <!-- AI-Learn Stylized Strings -->
+    <string name="ai_learn">AI-LEARN</string>
+    <string name="read_spell_grow">Read • Spell • Grow</string>
+    <string name="motto">Personalized Learning\nfor a Brighter Future</string>
+    <string name="get_started">Get Started</string>
+    <string name="student_login">Student Login</string>
+    <string name="parent_login">Parent Login</string>
+    <string name="enter_student_id">Enter your student ID</string>
+    <string name="forgot_password_q">Forgot password?</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+
+    <!-- Reading Modules -->
+    <string name="reading_modules_title">Reading Modules</string>
+    <string name="ai_reading_tutor_btn">🤖 AI Reading Tutor</string>
+    <string name="alphabet_learning_btn">🔤 Alphabet Learning</string>
+    <string name="phonics_learning_btn">🔊 Phonics Learning</string>
+    <string name="word_reading_btn">📖 Word Reading</string>
+    <string name="sentence_reading_btn">📝 Sentence Reading</string>
+    <string name="story_reading_btn">📚 Story Reading</string>
+
+    <!-- Sentences -->
+    <string name="sentences_title">Sentences - %1$s</string>
+    <string name="excellent_reading">Excellent Reading! ⭐</string>
+    <string name="keep_trying_ai">Keep trying! Listen to the AI:</string>
+    <string name="sentences_completed_msg">Sentences Completed! ⭐ +50 Stars</string>
+
+    <!-- Alphabet -->
+    <string name="alphabet_title">Alphabet - %1$s</string>
+    <string name="alphabet_completed_msg">Alphabet Completed! ⭐ +50 Stars</string>
+
+    <!-- Phonics -->
+    <string name="phonics_practice_title">Phonics Learning</string>
+    <string name="phonics_title">Phonics - %1$s</string>
+    <string name="phonics_completed_msg">Phonics Completed! ⭐ +50 Stars</string>
+    <string name="phonics_word_placeholder">Ball</string>
+
+    <!-- Words -->
+    <string name="words_title">Word Reading - %1$s</string>
+
+    <!-- Spelling -->
+    <string name="spelling_practice_title">Spelling Practice</string>
+    <string name="spelling_level">Level: %1$s</string>
+    <string name="spelling_correct">Correct! ⭐</string>
+    <string name="spelling_wrong">Wrong. Try again!</string>
+    <string name="spelling_complete_score">Spelling Complete! Score: %1$s</string>
+    <string name="hear_word">🔊 Hear Word</string>
+    <string name="sound_out">🔊 Sound Out</string>
+    <string name="voice_type">🎤 Voice Type</string>
+    <string name="spelling_word_image_desc">Spelling word image</string>
+    <string name="spelling_voice_fail">You said: %1$s. Try again!</string>
+
+    <!-- Dashboard -->
+    <string name="welcome_name">Welcome, %1$s!</string>
+    <string name="overall_progress">Overall Progress: %1$d%%</string>
+
+    <!-- Reading AI -->
+    <string name="ai_reading_tutor_title">Reading Tutor - %1$s</string>
+
+    <!-- Story -->
+    <string name="story_title_placeholder">Story Title</string>
+    <string name="story_content_placeholder">Story content will appear here.</string>
+    <string name="story_illustration">Story illustration</string>
+    <string name="read_aloud">🔊 Read Aloud</string>
+    <string name="story_completed_toast">Congratulations! You finished the story.</string>
+
+    <!-- Assessment -->
+    <string name="assessment_title">Assessment - %1$s</string>
+    <string name="question_count_label">Question %1$d of %2$d</string>
+    <string name="tap_mic_read">Tap the microphone and read the text above</string>
+    <string name="please_read_first">Please read the text first</string>
+    <string name="please_type_spelling">Please type your answer</string>
+    <string name="correct_feedback">Correct! Well done.</string>
+    <string name="incorrect_better_next_time">Not quite, better luck next time!</string>
+    <string name="correct_answer_is">The correct answer is %1$s</string>
+    <string name="score_label">Score: %1$s</string>
+    <string name="earned_stars_msg">You earned %1$d stars!</string>
+
+    <!-- Parent -->
+    <string name="parent">Parent</string>
+    <string name="parent_welcome">Welcome, %1$s!</string>
+    <string name="progress_updated">Progress updated!</string>
+    <string name="no_child_linked">No child linked yet</string>
+    <string name="no_assessment_yet">No assessment yet</string>
+    <string name="child_name_label">Child Name: %1$s</string>
+    <string name="child_grade_label">Grade: %1$s</string>
+    <string name="last_assess_score_label">Last Assessment: %1$s</string>
+    <string name="last_spelling_score_label">Last Spelling: %1$s</string>
+    <string name="total_stars_label">Total Stars: %1$d</string>
+    <string name="parent_login_success">Parent login successful!</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="enter_registered_name">Enter registered name</string>
+    <string name="invalid_stu_id">Invalid Student ID</string>
+    <string name="user_exists">User already exists</string>
+    <string name="parent_reg_success">Parent registration successful for child: %1$s</string>
+    <string name="profile_student_name">Student Name</string>
+
+    <!-- Student Registration -->
+    <string name="student_registration_title">Student Registration</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="birthday_hint">Birthday (YYYY-MM-DD)</string>
+    <string name="age_hint">Age</string>
+    <string name="select_gender_label">Select Gender:</string>
+    <string name="select_grade_level_label">Select Grade Level:</string>
+    <string name="register_button">Register</string>
+    <string name="back_to_login_button">Back to Login</string>
+
+    <!-- Progress Status -->
+    <string name="alphabet_not_started">Alphabet: ❌ Not Started</string>
+    <string name="star_value_count">0</string>
+    <string name="phonics_not_started">Phonics: ❌ Not Started</string>
+    <string name="words_not_started">Words: ❌ Not Started</string>
+    <string name="sentences_not_started">Sentences: ❌ Not Started</string>
+    <string name="stories_not_started">Stories: ❌ Not Started</string>
+
+</resources>

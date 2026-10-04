@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Casanesapps3">
+
+        <!-- Entry Point: Welcome Page -->
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity" />
+
+        <!-- Student Activities -->
+        <activity android:name=".StudentLoginActivity" />
+        <activity android:name=".StudentRegisterActivity" />
+        <activity android:name=".StudentDashboardActivity" />
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".ReadingActivity" />
+        <activity android:name=".ReadingAIActivity" />
+        <activity android:name=".AlphabetActivity" />
+        <activity android:name=".PhonicsActivity" />
+        <activity android:name=".WordsActivity" />
+        <activity android:name=".SentenceActivity" />
+        <activity android:name=".StoryActivity" />
+        <activity android:name=".SpellingActivity" />
+        <activity android:name=".AssessmentActivity" />
+        <activity android:name=".AssessmentResultActivity" />
+
+        <!-- Parent Activities -->
+        <activity android:name=".ParentLoginActivity" />
+        <activity android:name=".ParentRegisterActivity" />
+        <activity android:name=".ParentDashboardActivity" />
+
+    </application>
+
+</manifest>

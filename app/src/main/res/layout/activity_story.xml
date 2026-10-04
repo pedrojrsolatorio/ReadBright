@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F4FBF7">
+
+    <LinearLayout
+        android:id="@+id/layoutStoryPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvStoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/story_title_placeholder"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:fontFamily="serif"/>
+
+        <!-- Main Story Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F9F9F9"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivStoryImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="300dp"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/story_illustration"
+                        android:src="@drawable/ball_image"
+                        android:padding="8dp"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tvStoryContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/story_content_placeholder"
+                    android:textSize="20sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="8dp"
+                    android:gravity="center"
+                    android:fontFamily="serif"
+                    android:paddingBottom="10dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:textColor="#2E7D32"
+            android:minHeight="20dp"/>
+
+        <!-- Control Buttons -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReadAloud"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:text="@string/read_aloud"
+            app:backgroundTint="#1976D2"
+            app:cornerRadius="16dp"
+            android:paddingHorizontal="32dp"
+            android:layout_marginBottom="20dp"
+            android:textAllCaps="false"
+            app:icon="@android:drawable/ic_lock_silent_mode_off"
+            app:iconGravity="textStart"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPrevious"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="@string/previous_icon"
+                app:backgroundTint="#4CAF50"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="@string/next_icon"
+                app:backgroundTint="#4CAF50"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_menu"
+            android:layout_marginTop="24dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="#666666"
+            android:textAllCaps="false"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>

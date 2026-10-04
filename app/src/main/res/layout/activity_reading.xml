@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F4FBF7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reading_modules_title"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"/>
+
+        <!-- Cute Star Counter Card with soft rounded styling -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="#FFFFFF"
+            app:cardBackgroundColor="#FFFDE7"
+            android:layout_marginBottom="28dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⭐"
+                    android:textSize="26sp"/>
+                <TextView
+                    android:id="@+id/tvReadingStars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#FBC02D"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Main Super Cute Robot Tutor Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAITutor"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="@string/ai_reading_tutor_btn"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:backgroundTint="#1B5E20"
+            app:cornerRadius="24dp"
+            android:layout_marginBottom="24dp"
+            android:textAllCaps="false"
+            app:elevation="4dp"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="2dp"/>
+
+        <!-- Alphabet Learning Card Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAlphabet"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/alphabet_learning_btn"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="20dp"
+            android:layout_marginBottom="14dp"
+            android:textAllCaps="false"
+            app:elevation="2dp"/>
+
+        <!-- Phonics Card Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPhonics"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/phonics_learning_btn"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="20dp"
+            android:layout_marginBottom="14dp"
+            android:textAllCaps="false"
+            app:elevation="2dp"/>
+
+        <!-- Word Reading Card Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWords"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/word_reading_btn"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="20dp"
+            android:layout_marginBottom="14dp"
+            android:textAllCaps="false"
+            app:elevation="2dp"/>
+
+        <!-- Sentence Reading Card Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSentence"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/sentence_reading_btn"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="20dp"
+            android:layout_marginBottom="14dp"
+            android:textAllCaps="false"
+            app:elevation="2dp"/>
+
+        <!-- Story Reading Card Button (Orange pop accent) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStory"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:text="@string/story_reading_btn"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#F57F17"
+            app:cornerRadius="20dp"
+            android:layout_marginBottom="32dp"
+            android:textAllCaps="false"
+            app:elevation="3dp"/>
+
+        <!-- Back Button styled as clean neutral link -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_home_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="#666666"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>

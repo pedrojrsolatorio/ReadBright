@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Original Green Palette -->
+    <color name="primary">#2E7D32</color>
+    <color name="primary_dark">#1B5E20</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#FBC02D</color>
+
+    <color name="background">#E8F5E9</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#D32F2F</color>
+    <color name="success">#388E3C</color>
+
+    <color name="text_title">#1B5E20</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Module Specific -->
+    <color name="reading_card">#E8F5E9</color>
+    <color name="spelling_card">#FFF3E0</color>
+    <color name="star_yellow">#FBC02D</color>
+    <color name="progress_grey">#E0E0E0</color>
+
+    <color name="blue_button_ripple">#402E7D32</color>
+
+    <!-- Legacy Colors for Modules -->
+    <color name="alphabet_bg">#E8F5E9</color>
+    <color name="alphabet_accent">#2E7D32</color>
+    <color name="phonics_bg">#E8F5E9</color>
+    <color name="phonics_accent">#2E7D32</color>
+    <color name="words_bg">#E8F5E9</color>
+    <color name="words_accent">#2E7D32</color>
+    <color name="stories_bg">#E8F5E9</color>
+    <color name="stories_accent">#2E7D32</color>
+</resources>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Grade Levels for Registration -->
+    <string-array name="grade_levels">
+        <item>Grade 1</item>
+        <item>Grade 2</item>
+        <item>Grade 3</item>
+        <item>Grade 4</item>
+        <item>Grade 5</item>
+        <item>Grade 6</item>
+    </string-array>
+
+    <!-- Alphabet Letters -->
+    <string-array name="alphabet_letters">
+        <item>A</item><item>B</item><item>C</item><item>D</item><item>E</item><item>F</item><item>G</item><item>H</item><item>I</item><item>J</item><item>K</item><item>L</item><item>M</item><item>N</item><item>O</item><item>P</item><item>Q</item><item>R</item><item>S</item><item>T</item><item>U</item><item>V</item><item>W</item><item>X</item><item>Y</item><item>Z</item>
+    </string-array>
+
+    <!-- Phonics Grade-Specific Arrays - Expanded -->
+    <string-array name="phonics_g1">
+        <item>Apple</item><item>Ball</item><item>Cat</item><item>Dog</item><item>Egg</item>
+        <item>Fan</item><item>Map</item><item>Net</item><item>Pen</item><item>Tin</item>
+        <item>Ant</item><item>Bat</item><item>Cap</item><item>Dad</item><item>Hen</item>
+    </string-array>
+    <string-array name="phonics_g2">
+        <item>Igloo</item><item>Octopus</item><item>Pig</item><item>Sun</item><item>Box</item>
+        <item>Bed</item><item>Cup</item><item>Hat</item><item>Leg</item><item>Rat</item>
+        <item>Frog</item><item>Milk</item><item>Nest</item><item>Star</item><item>Tree</item>
+    </string-array>
+    <string-array name="phonics_g3">
+        <item>Bread</item><item>Chair</item><item>Clock</item><item>Ship</item><item>Thumb</item>
+        <item>Blue</item><item>Green</item><item>Train</item><item>Smile</item><item>Cloud</item>
+        <item>Beach</item><item>Fruit</item><item>Grape</item><item>Plane</item><item>Truck</item>
+    </string-array>
+    <string-array name="phonics_g4">
+        <item>Umbrella</item><item>Whale</item><item>Fish</item><item>Tree</item><item>Frog</item>
+        <item>Grass</item><item>Stone</item><item>Water</item><item>Light</item><item>Earth</item>
+        <item>Flower</item><item>Garden</item><item>River</item><item>School</item><item>Winter</item>
+    </string-array>
+    <string-array name="phonics_g5">
+        <item>Pencil</item><item>Marker</item><item>Paper</item><item>Crayon</item><item>Eraser</item>
+        <item>Window</item><item>Mirror</item><item>Bottle</item><item>Pocket</item><item>Bridge</item>
+        <item>Animal</item><item>Banana</item><item>Basket</item><item>Butter</item><item>Coffee</item>
+    </string-array>
+    <string-array name="phonics_g6">
+        <item>Laptop</item><item>Planet</item><item>Science</item><item>History</item><item>Future</item>
+        <item>System</item><item>Energy</item><item>Nature</item><item>Ocean</item><item>Theory</item>
+        <item>Library</item><item>Message</item><item>Network</item><item>Quality</item><item>Village</item>
+    </string-array>
+
+    <!-- Sentence Reading Grade-Specific Arrays - Expanded -->
+    <string-array name="sentences_g1">
+        <item>I see a cat.</item><item>It is a big ball.</item><item>The sun is hot.</item>
+        <item>A red apple.</item><item>Run to the dog.</item><item>I like to play.</item>
+        <item>My dad is big.</item><item>Sit on the mat.</item><item>The pen is blue.</item>
+    </string-array>
+    <string-array name="sentences_g2">
+        <item>The cat is sleeping.</item><item>My dog can run.</item><item>I like to play.</item>
+        <item>The sun is bright.</item><item>We play with a ball.</item><item>I have a hat.</item>
+        <item>The bird is small.</item><item>It is time to eat.</item><item>Go to the park.</item>
+    </string-array>
+    <string-array name="sentences_g3">
+        <item>The boy goes to school.</item><item>We play in the garden.</item><item>My mother is very kind.</item>
+        <item>I love reading books.</item><item>The flowers are pretty.</item><item>We go on a trip.</item>
+        <item>Please open the door.</item><item>The sky is very blue.</item><item>Wash your hands now.</item>
+    </string-array>
+    <string-array name="sentences_g4">
+        <item>The library is very quiet.</item><item>Plants need water and light.</item><item>He is reading a story.</item>
+        <item>Summer is a hot season.</item><item>The whale lives in the sea.</item><item>Trees give us fresh air.</item>
+        <item>Don\'t forget your umbrella.</item><item>The mountain is very high.</item><item>We learn about history.</item>
+    </string-array>
+    <string-array name="sentences_g5">
+        <item>The stars are shining bright in the sky.</item><item>We should always help our friends in need.</item><item>Learning new things every day is exciting.</item>
+        <item>Honesty is the best policy for everyone.</item><item>Protecting the forest is very important.</item><item>The teacher explains the lesson well.</item>
+        <item>Practice makes perfect in everything.</item><item>Health is wealth for every person.</item><item>Follow your dreams with confidence.</item>
+    </string-array>
+    <string-array name="sentences_g6">
+        <item>Respecting the environment is our responsibility.</item><item>Effective communication leads to better understanding.</item><item>Perseverance is key to achieving your goals.</item>
+        <item>Science helps us understand the world around us.</item><item>Education is the foundation of a bright future.</item><item>Technology connects people across the globe.</item>
+        <item>Innovation drives progress in modern society.</item><item>Unity in diversity makes our nation stronger.</item><item>Always strive for excellence in your work.</item>
+    </string-array>
+
+    <!-- Word Reading - Expanded -->
+    <string-array name="words_beginner">
+        <item>Fan</item><item>Map</item><item>Net</item><item>Pen</item><item>Tin</item>
+        <item>Sun</item><item>Red</item><item>Big</item><item>Run</item><item>Tap</item>
+        <item>Bed</item><item>Cup</item><item>Hat</item><item>Leg</item><item>Box</item>
+    </string-array>
+    <string-array name="words_intermediate">
+        <item>School</item><item>Garden</item><item>Father</item><item>Mother</item><item>Water</item>
+        <item>Morning</item><item>Friend</item><item>Holiday</item><item>Kitchen</item><item>Village</item>
+        <item>Banana</item><item>Basket</item><item>Castle</item><item>Doctor</item><item>Flower</item>
+    </string-array>
+    <string-array name="words_advanced">
+        <item>Butterfly</item><item>Computer</item><item>Mountain</item><item>Together</item><item>Yesterday</item>
+        <item>Adventure</item><item>Beautiful</item><item>Different</item><item>Important</item><item>Wonderful</item>
+        <item>Knowledge</item><item>Education</item><item>Experience</item><item>Confidence</item><item>Discovery</item>
+    </string-array>
+
+    <!-- Stories -->
+    <string-array name="beginner_titles"><item>The Little Red Ball</item></string-array>
+    <string-array name="beginner_stories"><item>Tim has a little red ball. He plays with it in the park. The ball rolls fast and Tim runs to catch it. He is very happy.</item></string-array>
+    <string-array name="beginner_images"><item>@drawable/ball_image</item></string-array>
+
+    <string-array name="intermediate_titles"><item>A Day at the Garden</item></string-array>
+    <string-array name="intermediate_stories"><item>Sarah loves flowers. She goes to the garden every morning. She waters the plants and watches the butterflies fly around. The garden looks beautiful.</item></string-array>
+    <string-array name="intermediate_images"><item>@drawable/cat_image</item></string-array>
+
+    <string-array name="advanced_titles"><item>The Brave Little Whale</item></string-array>
+    <string-array name="advanced_stories"><item>Deep in the ocean, there lived a brave little whale named Wally. Wally loved to explore new places and meet new friends. One day, he helped a lost ship find its way back home.</item></string-array>
+    <string-array name="advanced_images"><item>@drawable/whale_image</item></string-array>
+
+    <!-- AI Reading Tutor and Spelling arrays remain unchanged -->
+    <string-array name="reading_ai_g1"><item>Apple</item><item>Ball</item><item>Cat</item><item>Dog</item><item>Egg</item><item>Fan</item><item>Map</item><item>Net</item></string-array>
+    <string-array name="reading_ai_g2"><item>Banana</item><item>Clock</item><item>Garden</item><item>School</item><item>Water</item><item>Morning</item><item>Friend</item><item>Hat</item></string-array>
+    <string-array name="reading_ai_g3"><item>Computer</item><item>Elephant</item><item>Mountain</item><item>Together</item><item>Yesterday</item><item>Kitchen</item><item>Village</item><item>Cloud</item></string-array>
+    <string-array name="reading_ai_g4"><item>Adventure</item><item>Knowledge</item><item>Universe</item><item>Beautiful</item><item>Wonderful</item><item>Important</item><item>Different</item><item>Flower</item></string-array>
+    <string-array name="reading_ai_g5"><item>Atmosphere</item><item>Education</item><item>Government</item><item>Literature</item><item>Philosophy</item><item>Experience</item><item>Confidence</item><item>Discovery</item></string-array>
+    <string-array name="reading_ai_g6"><item>Achievement</item><item>Experience</item><item>Intelligence</item><item>Responsibility</item><item>Technology</item><item>Communication</item><item>Environment</item><item>Imagination</item></string-array>
+
+    <string-array name="spelling_g1"><item>Cat</item><item>Dog</item><item>Sun</item><item>Box</item><item>Pig</item></string-array>
+    <string-array name="spelling_g2"><item>Apple</item><item>Ball</item><item>Egg</item><item>Igloo</item><item>Fish</item></string-array>
+    <string-array name="spelling_g3"><item>Banana</item><item>Clock</item><item>Chair</item><item>Bread</item><item>Water</item></string-array>
+    <string-array name="spelling_g4"><item>School</item><item>Garden</item><item>Father</item><item>Mother</item><item>Friend</item></string-array>
+    <string-array name="spelling_g5"><item>Mountain</item><item>Knowledge</item><item>Universe</item><item>Beautiful</item><item>Together</item></string-array>
+    <string-array name="spelling_g6"><item>Achievement</item><item>Technology</item><item>Experience</item><item>Intelligence</item><item>Wonderful</item></string-array>
+
+    <string-array name="assess_g1_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g1_instructions"><item>Read aloud:</item><item>Spell the word:</item></string-array>
+    <string-array name="assess_g1_content"><item>Cat</item><item>Dog</item></string-array>
+
+    <string-array name="assess_g3_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g3_instructions"><item>Read the sentence:</item><item>Spell this fruit:</item></string-array>
+    <string-array name="assess_g3_content"><item>The sun is bright.</item><item>Apple</item></string-array>
+
+    <string-array name="assess_g5_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g5_instructions"><item>Read the paragraph:</item><item>Spell this word:</item></string-array>
+    <string-array name="assess_g5_content"><item>Nature is full of surprises and beauty.</item><item>Mountain</item></string-array>
+</resources>

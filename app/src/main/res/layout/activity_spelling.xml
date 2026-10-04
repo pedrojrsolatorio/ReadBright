@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E8F5E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spelling_practice_title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:drawable/dialog_holo_light_frame">
+
+            <TextView
+                android:id="@+id/tvGradeInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_grade"
+                android:textSize="18sp"
+                android:textColor="#2E7D32"
+                android:layout_marginBottom="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivWordImage"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/pig_image"
+                android:visibility="visible"
+                android:contentDescription="@string/spelling_word_image_desc" />
+
+            <Button
+                android:id="@+id/btnListen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hear_word"
+                android:backgroundTint="#1976D2"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="20dp">
+            <LinearLayout
+                android:id="@+id/layoutAnswerSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"/>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"/>
+
+        <GridLayout
+            android:id="@+id/layoutKeyboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="7"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnMic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/voice_type"
+                android:backgroundTint="#D32F2F"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/back_to_dashboard"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#666666"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>

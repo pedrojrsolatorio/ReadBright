@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E8F5E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⭐"
+            android:textSize="100sp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Great Job!"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="30dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvFinalScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Score: 5/5"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#2E7D32"/>
+
+            <TextView
+                android:id="@+id/tvStarsEarned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You earned 100 stars! ⭐"
+                android:textSize="18sp"
+                android:textColor="#666666"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+        <!-- New Promotion Message View -->
+        <TextView
+            android:id="@+id/tvPromotionMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Congratulations! You are promoted!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1976D2"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Continue"
+            android:backgroundTint="#2E7D32"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>

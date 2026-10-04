@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E8F5E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/student_registration_title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/full_name_hint"
+            android:padding="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/etBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/birthday_hint"
+            android:padding="15dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/age_hint"
+            android:padding="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:inputType="number"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_gender_label"
+            android:textSize="18sp"
+            android:textColor="#2E7D32"
+            android:layout_gravity="start"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerGender"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:drawable/btn_dropdown"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_grade_level_label"
+            android:textSize="18sp"
+            android:textColor="#2E7D32"
+            android:layout_gravity="start"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerGrade"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/grade_levels"/>
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/enter_username"
+            android:padding="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:layout_marginBottom="30dp"/>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/register_button"
+            android:backgroundTint="#2E7D32"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_login_button"
+            android:textColor="#666666"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>

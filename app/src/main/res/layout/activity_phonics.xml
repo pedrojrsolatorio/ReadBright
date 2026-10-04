@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F4FBF7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phonics_practice_title"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <!-- Main Display Card for Image and Text Word -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F9F9F9"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivWordImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/spelling_word_image_desc"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ball_image"
+                        android:padding="16dp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tvWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phonics_word_placeholder"
+                    android:textSize="44sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E7D32"
+                    android:letterSpacing="0.02" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Feedback Box -->
+        <TextView
+            android:id="@+id/tvFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:minHeight="24dp" />
+
+        <!-- Sound Interaction Row Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSpeak"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="@string/hear_word"
+                android:layout_marginEnd="8dp"
+                app:backgroundTint="#1976D2"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:elevation="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSoundOut"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="@string/sound_out"
+                android:layout_marginEnd="8dp"
+                app:backgroundTint="#FF9800"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:elevation="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMic"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:text="@string/mic_icon"
+                app:backgroundTint="#D32F2F"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                android:padding="0dp"
+                android:textSize="20sp"
+                app:elevation="2dp" />
+        </LinearLayout>
+
+        <!-- Navigation Row Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPrevious"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:text="@string/previous_icon"
+                app:backgroundTint="#2E7D32"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:text="@string/next_icon"
+                app:backgroundTint="#2E7D32"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Back Button link -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_to_menu"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="#666666"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</ScrollView>

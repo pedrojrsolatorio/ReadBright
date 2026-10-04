@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E8F5E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@android:drawable/ic_menu_myplaces"
+            android:layout_marginTop="20dp"
+            android:contentDescription="Profile Icon" />
+
+        <TextView
+            android:id="@+id/tvProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Name"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tvProfileGrade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grade Level"
+            android:textSize="20sp"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="15dp"/>
+
+        <!-- Additional Personal Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/tvProfileBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday: N/A"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvProfileGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender: N/A"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvProfileAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age: N/A"
+                android:textSize="16sp"
+                android:textColor="#333333"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="20dp"
+            android:layout_marginBottom="25dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐ Total Stars Earned"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#666666"/>
+
+            <TextView
+                android:id="@+id/tvProfileStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="32sp"
+                android:textColor="#FBC02D"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Learning Progress:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1B5E20"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView android:id="@+id/tvStatusAlphabet" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Alphabet: Not Started" android:textSize="17sp" android:padding="8dp" android:textColor="#212121"/>
+            <TextView android:id="@+id/tvStatusPhonics" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Phonics: Not Started" android:textSize="17sp" android:padding="8dp" android:textColor="#212121"/>
+            <TextView android:id="@+id/tvStatusWords" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Words: Not Started" android:textSize="17sp" android:padding="8dp" android:textColor="#212121"/>
+            <TextView android:id="@+id/tvStatusSentences" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sentences: Not Started" android:textSize="17sp" android:padding="8dp" android:textColor="#212121"/>
+            <TextView android:id="@+id/tvStatusStories" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Stories: Not Started" android:textSize="17sp" android:padding="8dp" android:textColor="#212121"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnBackProfile"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Back to Dashboard"
+            android:backgroundTint="#666666"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="30dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</ScrollView>
