@@ -26,16 +26,111 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class PhonicsActivity extends AppCompatActivity {
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
+    private static final Map<String, String> WORD_EMOJIS = new HashMap<>();
+    static {
+        WORD_EMOJIS.put("apple", "\uD83C\uDF4E");
+        WORD_EMOJIS.put("ball", "\u26BD");
+        WORD_EMOJIS.put("cat", "\uD83D\uDC08");
+        WORD_EMOJIS.put("dog", "\uD83D\uDC36");
+        WORD_EMOJIS.put("egg", "\uD83E\uDD5A");
+        WORD_EMOJIS.put("fan", "\uD83E\uDEAD");
+        WORD_EMOJIS.put("map", "\uD83D\uDDFA\uFE0F");
+        WORD_EMOJIS.put("net", "\uD83E\uDD45");
+        WORD_EMOJIS.put("pen", "\uD83D\uDD8A\uFE0F");
+        WORD_EMOJIS.put("tin", "\uD83E\uDD6B");
+        WORD_EMOJIS.put("ant", "\uD83D\uDC1C");
+        WORD_EMOJIS.put("bat", "\uD83E\uDD87");
+        WORD_EMOJIS.put("cap", "\uD83E\uDDE2");
+        WORD_EMOJIS.put("dad", "\uD83D\uDC68");
+        WORD_EMOJIS.put("hen", "\uD83D\uDC14");
+        WORD_EMOJIS.put("igloo", "\uD83D\uDED6");
+        WORD_EMOJIS.put("octopus", "\uD83D\uDC19");
+        WORD_EMOJIS.put("pig", "\uD83D\uDC37");
+        WORD_EMOJIS.put("sun", "\u2600\uFE0F");
+        WORD_EMOJIS.put("box", "\uD83D\uDCE6");
+        WORD_EMOJIS.put("bed", "\uD83D\uDECF\uFE0F");
+        WORD_EMOJIS.put("cup", "\uD83E\uDD64");
+        WORD_EMOJIS.put("hat", "\uD83C\uDFA9");
+        WORD_EMOJIS.put("leg", "\uD83E\uDDB5");
+        WORD_EMOJIS.put("rat", "\uD83D\uDC00");
+        WORD_EMOJIS.put("frog", "\uD83D\uDC38");
+        WORD_EMOJIS.put("milk", "\uD83E\uDD5B");
+        WORD_EMOJIS.put("nest", "\uD83E\uDEBA");
+        WORD_EMOJIS.put("star", "\u2B50");
+        WORD_EMOJIS.put("tree", "\uD83C\uDF33");
+        WORD_EMOJIS.put("bread", "\uD83C\uDF5E");
+        WORD_EMOJIS.put("chair", "\uD83E\uDE91");
+        WORD_EMOJIS.put("clock", "\uD83D\uDD50");
+        WORD_EMOJIS.put("ship", "\uD83D\uDEA2");
+        WORD_EMOJIS.put("thumb", "\uD83D\uDC4D");
+        WORD_EMOJIS.put("blue", "\uD83D\uDD35");
+        WORD_EMOJIS.put("green", "\uD83D\uDFE2");
+        WORD_EMOJIS.put("train", "\uD83D\uDE86");
+        WORD_EMOJIS.put("smile", "\uD83D\uDE0A");
+        WORD_EMOJIS.put("cloud", "\u2601\uFE0F");
+        WORD_EMOJIS.put("beach", "\uD83C\uDFD6\uFE0F");
+        WORD_EMOJIS.put("fruit", "\uD83C\uDF49");
+        WORD_EMOJIS.put("grape", "\uD83C\uDF47");
+        WORD_EMOJIS.put("plane", "\u2708\uFE0F");
+        WORD_EMOJIS.put("truck", "\uD83D\uDE9A");
+        WORD_EMOJIS.put("umbrella", "\u2602\uFE0F");
+        WORD_EMOJIS.put("whale", "\uD83D\uDC33");
+        WORD_EMOJIS.put("fish", "\uD83D\uDC1F");
+        WORD_EMOJIS.put("grass", "\uD83C\uDF3F");
+        WORD_EMOJIS.put("stone", "\uD83E\uDEA8");
+        WORD_EMOJIS.put("water", "\uD83D\uDCA7");
+        WORD_EMOJIS.put("light", "\uD83D\uDCA1");
+        WORD_EMOJIS.put("earth", "\uD83C\uDF0D");
+        WORD_EMOJIS.put("flower", "\uD83C\uDF38");
+        WORD_EMOJIS.put("garden", "\uD83E\uDEB4");
+        WORD_EMOJIS.put("river", "\uD83C\uDF0A");
+        WORD_EMOJIS.put("school", "\uD83C\uDFEB");
+        WORD_EMOJIS.put("winter", "\u2744\uFE0F");
+        WORD_EMOJIS.put("pencil", "\u270F\uFE0F");
+        WORD_EMOJIS.put("marker", "\uD83D\uDD8D\uFE0F");
+        WORD_EMOJIS.put("paper", "\uD83D\uDCC4");
+        WORD_EMOJIS.put("crayon", "\uD83D\uDD8D\uFE0F");
+        WORD_EMOJIS.put("eraser", "\uD83E\uDDFD");
+        WORD_EMOJIS.put("window", "\uD83E\uDE9F");
+        WORD_EMOJIS.put("mirror", "\uD83E\uDE9E");
+        WORD_EMOJIS.put("bottle", "\uD83C\uDF7E");
+        WORD_EMOJIS.put("pocket", "\uD83D\uDC56");
+        WORD_EMOJIS.put("bridge", "\uD83C\uDF09");
+        WORD_EMOJIS.put("animal", "\uD83E\uDD81");
+        WORD_EMOJIS.put("banana", "\uD83C\uDF4C");
+        WORD_EMOJIS.put("basket", "\uD83E\uDDFA");
+        WORD_EMOJIS.put("butter", "\uD83E\uDDC8");
+        WORD_EMOJIS.put("coffee", "\u2615");
+        WORD_EMOJIS.put("laptop", "\uD83D\uDCBB");
+        WORD_EMOJIS.put("planet", "\uD83E\uDE90");
+        WORD_EMOJIS.put("science", "\uD83D\uDD2C");
+        WORD_EMOJIS.put("history", "\uD83D\uDCDC");
+        WORD_EMOJIS.put("future", "\uD83D\uDD2E");
+        WORD_EMOJIS.put("system", "\u2699\uFE0F");
+        WORD_EMOJIS.put("energy", "\u26A1");
+        WORD_EMOJIS.put("nature", "\uD83C\uDF3F");
+        WORD_EMOJIS.put("ocean", "\uD83C\uDF0A");
+        WORD_EMOJIS.put("theory", "\uD83D\uDCD6");
+        WORD_EMOJIS.put("library", "\uD83D\uDCDA");
+        WORD_EMOJIS.put("message", "\uD83D\uDCAC");
+        WORD_EMOJIS.put("network", "\uD83C\uDF10");
+        WORD_EMOJIS.put("quality", "\uD83D\uDC8E");
+        WORD_EMOJIS.put("village", "\uD83C\uDFD8\uFE0F");
+    }
+
     private TextView tvWord, tvFeedback;
     private ImageView ivWordImage;
-    private Button btnSpeak, btnMic, btnPrevious, btnSoundOut, btnNext, btnBack;
+    private TextView tvEmojiFallback;
+    private Button btnSpeak, btnMic, btnPrevious, btnSoundOut, btnNext, btnStartOver, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -57,11 +152,13 @@ public class PhonicsActivity extends AppCompatActivity {
         tvWord = findViewById(R.id.tvWord);
         tvFeedback = findViewById(R.id.tvFeedback);
         ivWordImage = findViewById(R.id.ivWordImage);
+        tvEmojiFallback = findViewById(R.id.tvEmojiFallback);
         btnSpeak = findViewById(R.id.btnSpeak);
         btnMic = findViewById(R.id.btnMic);
         btnPrevious = findViewById(R.id.btnPrevious);
         btnSoundOut = findViewById(R.id.btnSoundOut);
         btnNext = findViewById(R.id.btnNext);
+        btnStartOver = findViewById(R.id.btnStartOver);
         btnBack = findViewById(R.id.btnBack);
 
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
@@ -124,6 +221,11 @@ public class PhonicsActivity extends AppCompatActivity {
         });
 
         btnBack.setOnClickListener(v -> finish());
+
+        btnStartOver.setOnClickListener(v -> {
+            learningEngine.clearProgress();
+            setupPhonicsList();
+        });
         
         updateUI();
     }
@@ -144,9 +246,17 @@ public class PhonicsActivity extends AppCompatActivity {
             tvWord.setText("Mastered!");
             btnPrevious.setEnabled(false);
             btnNext.setEnabled(false);
+            if (btnSpeak != null) btnSpeak.setEnabled(false);
+            if (btnMic != null) btnMic.setEnabled(false);
+            if (btnSoundOut != null) btnSoundOut.setEnabled(false);
+            if (btnStartOver != null) btnStartOver.setVisibility(View.VISIBLE);
             return;
         }
 
+        if (btnSpeak != null) btnSpeak.setEnabled(true);
+        if (btnMic != null) btnMic.setEnabled(true);
+        if (btnSoundOut != null) btnSoundOut.setEnabled(true);
+        if (btnStartOver != null) btnStartOver.setVisibility(View.GONE);
         updateUI();
     }
 
@@ -202,9 +312,27 @@ public class PhonicsActivity extends AppCompatActivity {
         if (resId != 0) {
             Glide.with(this).load(resId).into(ivWordImage);
             ivWordImage.setVisibility(View.VISIBLE);
+            tvEmojiFallback.setVisibility(View.GONE);
         } else {
             ivWordImage.setVisibility(View.GONE);
+            String emoji = emojiFor(text);
+            if (emoji != null) {
+                tvEmojiFallback.setText(emoji);
+                tvEmojiFallback.setVisibility(View.VISIBLE);
+            } else {
+                tvEmojiFallback.setVisibility(View.GONE);
+            }
         }
+    }
+
+    private String emojiFor(String text) {
+        if (text == null) return null;
+        String key = text.trim().toLowerCase(Locale.US);
+        String emoji = WORD_EMOJIS.get(key);
+        if (emoji != null) return emoji;
+        int space = key.indexOf(' ');
+        if (space > 0) return WORD_EMOJIS.get(key.substring(0, space));
+        return null;
     }
 
     private void initializeSpeechRecognizer() {

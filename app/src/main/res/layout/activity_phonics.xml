@@ -58,6 +58,16 @@
                         android:scaleType="centerInside"
                         android:src="@drawable/ball_image"
                         android:padding="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvEmojiFallback"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="130sp"
+                        android:text=""
+                        android:contentDescription="@string/spelling_word_image_desc"
+                        android:visibility="gone" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
@@ -168,6 +178,19 @@
         </LinearLayout>
 
         <!-- Back Button link -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartOver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Start Over"
+            android:layout_marginBottom="8dp"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="16dp"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
