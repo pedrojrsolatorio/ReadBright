@@ -129,6 +129,22 @@ public class ContinuousWordEngine {
         return new ArrayList<String>(selection.subList(0, limit));
     }
 
+    public int getTotalWordCount() {
+        Set<String> distinct = new HashSet<String>();
+        for (String w : WORD_BANK) {
+            if (w != null && w.trim().length() > 0) distinct.add(w.trim().toLowerCase());
+        }
+        return distinct.size();
+    }
+
+    public int getCompletedWordCount() {
+        Set<String> completed = new HashSet<String>();
+        for (String w : dbHelper.getAIHistory(username, historyKey)) {
+            if (w != null && w.trim().length() > 0) completed.add(w.trim().toLowerCase());
+        }
+        return completed.size();
+    }
+
     public void markWordCompleted(String word) {
         if (word == null || word.trim().length() == 0) return;
         dbHelper.addToAIHistory(username, word.trim().toLowerCase(), historyKey);

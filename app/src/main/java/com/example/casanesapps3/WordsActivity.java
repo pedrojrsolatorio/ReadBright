@@ -12,7 +12,6 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,6 +107,15 @@ public class WordsActivity extends AppCompatActivity {
             }
         });
 
+        if (btnPrevious != null) {
+            btnPrevious.setOnClickListener(v -> {
+                if (words != null && index > 0) {
+                    index--;
+                    updateUI();
+                }
+            });
+        }
+
         btnBack.setOnClickListener(v -> finish());
     }
 
@@ -121,10 +129,17 @@ public class WordsActivity extends AppCompatActivity {
         if (words.length == 0) {
             tvWord.setText("Great Job!");
             Toast.makeText(this, "You have mastered all available words!", Toast.LENGTH_LONG).show();
+            setNavEnabled(false);
             return;
         }
 
+        setNavEnabled(true);
         updateUI();
+    }
+
+    private void setNavEnabled(boolean enabled) {
+        if (btnNext != null) btnNext.setEnabled(enabled);
+        if (btnPrevious != null) btnPrevious.setEnabled(enabled);
     }
 
     private void updateUI() {
@@ -134,6 +149,9 @@ public class WordsActivity extends AppCompatActivity {
         
         // Mark as seen immediately when shown
         wordEngine.markWordAsSeen(words[index]);
+
+        if (btnNext != null) btnNext.setEnabled(true);
+        if (btnPrevious != null) btnPrevious.setEnabled(index > 0);
     }
 
     private void initializeSpeechRecognizer() {

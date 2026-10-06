@@ -144,7 +144,10 @@ public class PhonicsActivity extends AppCompatActivity {
             tvWord.setText("Mastered!");
             btnPrevious.setEnabled(false);
             btnNext.setEnabled(false);
+            return;
         }
+
+        updateUI();
     }
 
     private void updateUI() {

@@ -133,7 +133,10 @@ public class SentenceActivity extends AppCompatActivity {
             tvSentence.setText("All Mastered!");
             btnPrevious.setEnabled(false);
             btnNext.setEnabled(false);
+            return;
         }
+
+        updateUI();
     }
 
     private void updateUI() {

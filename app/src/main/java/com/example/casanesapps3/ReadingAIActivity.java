@@ -30,8 +30,8 @@ public class ReadingAIActivity extends AppCompatActivity {
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
-    private TextView tvTargetText, tvFeedback;
-    private Button btnListen, btnMic, btnPrevious, btnNext, btnBack;
+    private TextView tvTargetText, tvResult, tvFeedback;
+    private Button btnListen, btnMic, btnPrevious, btnNext, btnStartOver, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -48,11 +48,13 @@ public class ReadingAIActivity extends AppCompatActivity {
 
         // Corrected IDs to match activity_reading_ai.xml
         tvTargetText = findViewById(R.id.tvTargetText);
+        tvResult = findViewById(R.id.tvResult);
         tvFeedback = findViewById(R.id.tvFeedback);
         btnListen = findViewById(R.id.btnListen);
         btnMic = findViewById(R.id.btnMic);
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
+        btnStartOver = findViewById(R.id.btnStartOver);
         btnBack = findViewById(R.id.btnBack);
 
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
@@ -103,6 +105,11 @@ public class ReadingAIActivity extends AppCompatActivity {
             }
         });
 
+        btnStartOver.setOnClickListener(v -> {
+            wordEngine.clearProgress();
+            setupBatch();
+        });
+
         btnBack.setOnClickListener(v -> finish());
     }
 
@@ -113,12 +120,20 @@ public class ReadingAIActivity extends AppCompatActivity {
         index = 0;
 
         if (words.length == 0) {
-            tvTargetText.setText("Done!");
-            Toast.makeText(this, "Mastered all words!", Toast.LENGTH_SHORT).show();
+            tvTargetText.setText("All Mastered!");
+            tvResult.setText("You mastered all " + wordEngine.getTotalWordCount() + " words! \uD83C\uDF1F");
+            tvFeedback.setText("");
             btnPrevious.setEnabled(false);
             btnNext.setEnabled(false);
+            btnListen.setEnabled(false);
+            btnMic.setEnabled(false);
+            btnStartOver.setVisibility(View.VISIBLE);
             return;
         }
+
+        btnListen.setEnabled(true);
+        btnMic.setEnabled(true);
+        btnStartOver.setVisibility(View.GONE);
         updateUI();
     }
 
@@ -132,6 +147,7 @@ public class ReadingAIActivity extends AppCompatActivity {
         }
         btnPrevious.setEnabled(index > 0);
         btnNext.setEnabled(words.length > 0);
+        tvResult.setText(wordEngine.getCompletedWordCount() + " / " + wordEngine.getTotalWordCount() + " words mastered");
     }
 
     private void initializeSpeechRecognizer() {
