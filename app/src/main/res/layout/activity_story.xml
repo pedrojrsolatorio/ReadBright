@@ -157,6 +157,18 @@
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
         </LinearLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartOver"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Start Over"
+            android:layout_marginTop="8dp"
+            app:backgroundTint="#2E7D32"
+            app:cornerRadius="16dp"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:visibility="gone"/>
+
         <Button
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"

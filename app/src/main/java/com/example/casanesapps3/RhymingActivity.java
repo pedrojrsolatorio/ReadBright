@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -37,7 +39,7 @@ public class RhymingActivity extends AppCompatActivity {
     private TextView tvStoryTitle, tvStoryContent, tvFeedback;
     private ImageView ivStoryImage;
     private View layoutStoryPage;
-    private Button btnPrevious, btnNext, btnMic;
+    private Button btnPrevious, btnNext, btnMic, btnStartOver;
     private TextToSpeech textToSpeech;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -48,6 +50,8 @@ public class RhymingActivity extends AppCompatActivity {
     private String grade;
     private String username = "";
     private boolean starsAwarded = false;
+    private boolean allMastered = false;
+    private boolean autoAdvancing = false;
     private int index = 0;
     private DatabaseHelper dbHelper;
     private ContinuousLearningEngine storyEngine;
@@ -68,6 +72,7 @@ public class RhymingActivity extends AppCompatActivity {
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
         btnMic = findViewById(R.id.btnMic);
+        btnStartOver = findViewById(R.id.btnStartOver);
         Button btnReadAloud = findViewById(R.id.btnReadAloud);
         Button btnBack = findViewById(R.id.btnBack);
 
@@ -108,16 +113,12 @@ public class RhymingActivity extends AppCompatActivity {
         }
 
         btnNext.setOnClickListener(v -> {
-            if (stories != null && index < stories.length - 1) {
-                storyEngine.markCompleted(titles[index]);
+            if (stories == null || stories.length == 0) return;
+            storyEngine.markCompleted(titles[index]);
+            if (index < stories.length - 1) {
                 playFlipAnimation(true);
-            } else if (stories != null && index == stories.length - 1) {
-                storyEngine.markCompleted(titles[index]);
-                if (!starsAwarded) awardCompletionStars();
-                Toast.makeText(this, "Loading more rhyming words...", Toast.LENGTH_SHORT).show();
-                setupRhymingList(grade);
-                index = 0;
-                updateUI();
+            } else {
+                reloadBatch();
             }
         });
 
@@ -125,6 +126,13 @@ public class RhymingActivity extends AppCompatActivity {
             if (index > 0) {
                 playFlipAnimation(false);
             }
+        });
+
+        btnStartOver.setOnClickListener(v -> {
+            storyEngine.clearProgress();
+            allMastered = false;
+            setupRhymingList(grade);
+            updateUI();
         });
 
         btnBack.setOnClickListener(v -> finish());
@@ -198,12 +206,23 @@ public class RhymingActivity extends AppCompatActivity {
         }
 
         if (matched) {
+            if (autoAdvancing) return;
+            autoAdvancing = true;
             if (tvFeedback != null) {
                 tvFeedback.setText("Great Job! ⭐ You said: " + spokenText);
                 tvFeedback.setTextColor(Color.parseColor("#2E7D32"));
             }
             storyEngine.markCompleted(titles[index]);
             ConfettiView.show(this, textToSpeech);
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                autoAdvancing = false;
+                if (stories != null && index < stories.length - 1) {
+                    playFlipAnimation(true);
+                } else {
+                    reloadBatch();
+                }
+            }, 1500);
         } else {
             if (tvFeedback != null) {
                 tvFeedback.setText("You said: " + spokenText + ". Try saying one of the rhyming words!");
@@ -269,16 +288,17 @@ public class RhymingActivity extends AppCompatActivity {
         int count = Math.min(500, freshTitles.length);
         
         if (count == 0) {
-            // All rhyming items completed! Reload all items for continuous review
+            // All rhyming items completed!
             if (!starsAwarded) awardCompletionStars();
-            titles = allTitles;
-            stories = allStories;
-            images = allImages;
+            allMastered = true;
+            titles = null;
+            stories = null;
+            images = null;
             index = 0;
-            Toast.makeText(this, "All rhyming words completed! Practice mode active ⭐", Toast.LENGTH_LONG).show();
             return;
         }
 
+        allMastered = false;
         titles = new String[count];
         stories = new String[count];
         images = new int[count];
@@ -296,7 +316,25 @@ public class RhymingActivity extends AppCompatActivity {
         }
     }
 
+    private void reloadBatch() {
+        if (!starsAwarded) awardCompletionStars();
+        setupRhymingList(grade);
+        index = 0;
+        updateUI();
+    }
+
     private void updateUI() {
+        if (allMastered) {
+            tvStoryTitle.setText("All Mastered!");
+            tvStoryContent.setText("You mastered all the rhyming word families! \uD83C\uDF1F");
+            if (tvFeedback != null) tvFeedback.setText("");
+            if (ivStoryImage != null) ivStoryImage.setVisibility(View.GONE);
+            btnPrevious.setEnabled(false);
+            btnNext.setEnabled(false);
+            if (btnMic != null) btnMic.setEnabled(false);
+            if (btnStartOver != null) btnStartOver.setVisibility(View.VISIBLE);
+            return;
+        }
         if (stories == null || stories.length == 0 || index >= stories.length) {
             tvStoryTitle.setText("Rhyming Words - " + grade);
             tvStoryContent.setText("Great job! All rhyming word families completed!");
@@ -318,6 +356,8 @@ public class RhymingActivity extends AppCompatActivity {
 
         btnPrevious.setEnabled(index > 0);
         btnNext.setEnabled(true);
+        if (btnMic != null) btnMic.setEnabled(true);
+        if (btnStartOver != null) btnStartOver.setVisibility(View.GONE);
     }
 
     private void awardCompletionStars() {

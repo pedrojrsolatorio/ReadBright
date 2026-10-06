@@ -91,4 +91,8 @@ public class ContinuousLearningEngine {
         if (item == null || item.trim().length() == 0) return;
         dbHelper.markAsSeen(username, item.trim().toLowerCase(), historyKey);
     }
+
+    public void clearProgress() {
+        dbHelper.clearAIHistory(username, historyKey);
+    }
 }
