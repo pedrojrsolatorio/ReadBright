@@ -152,6 +152,8 @@ public class SpellingActivity extends AppCompatActivity {
             
             // MASTERED: Save to DB so it never repeats
             spellingEngine.markWordCompleted(wordList.get(currentIndex));
+
+            ConfettiView.show(this, textToSpeech);
             
             tvFeedback.postDelayed(() -> { 
                 currentIndex++; 
@@ -166,11 +168,30 @@ public class SpellingActivity extends AppCompatActivity {
     }
 
     private void updateWordImage() {
-        if (ivWordImage == null) return;
-        String word = currentTargetWord.toLowerCase().trim();
-        int resId = getResources().getIdentifier(word, "drawable", getPackageName());
-        if (resId != 0) Glide.with(this).load(resId).into(ivWordImage);
-        else ivWordImage.setImageResource(android.R.drawable.ic_menu_gallery);
+        if (ivWordImage == null || currentTargetWord == null) return;
+        String cleanName = currentTargetWord.toLowerCase().replaceAll("[^a-z]", "").trim();
+        int resId = getResources().getIdentifier(cleanName + "_image", "drawable", getPackageName());
+        if (resId == 0) resId = getResources().getIdentifier(cleanName + "_real", "drawable", getPackageName());
+        if (resId == 0) resId = getResources().getIdentifier(cleanName, "drawable", getPackageName());
+
+        if (resId == 0) {
+            String[] words = currentTargetWord.toLowerCase().split("\\s+");
+            for (String w : words) {
+                String keyword = w.replaceAll("[^a-z]", "");
+                if (keyword.isEmpty()) continue;
+                resId = getResources().getIdentifier(keyword + "_image", "drawable", getPackageName());
+                if (resId == 0) resId = getResources().getIdentifier(keyword + "_real", "drawable", getPackageName());
+                if (resId == 0) resId = getResources().getIdentifier(keyword, "drawable", getPackageName());
+                if (resId != 0) break;
+            }
+        }
+
+        if (resId != 0) {
+            Glide.with(this).load(resId).into(ivWordImage);
+            ivWordImage.setVisibility(View.VISIBLE);
+        } else {
+            ivWordImage.setVisibility(View.GONE);
+        }
     }
 
     private void generateKeyboardLetters() {

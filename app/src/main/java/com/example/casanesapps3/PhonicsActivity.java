@@ -14,6 +14,7 @@ import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -30,7 +34,8 @@ public class PhonicsActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private TextView tvWord, tvFeedback;
-    private Button btnSpeak, btnMic, btnNext, btnBack;
+    private ImageView ivWordImage;
+    private Button btnSpeak, btnMic, btnPrevious, btnSoundOut, btnNext, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -51,8 +56,11 @@ public class PhonicsActivity extends AppCompatActivity {
 
         tvWord = findViewById(R.id.tvWord);
         tvFeedback = findViewById(R.id.tvFeedback);
+        ivWordImage = findViewById(R.id.ivWordImage);
         btnSpeak = findViewById(R.id.btnSpeak);
         btnMic = findViewById(R.id.btnMic);
+        btnPrevious = findViewById(R.id.btnPrevious);
+        btnSoundOut = findViewById(R.id.btnSoundOut);
         btnNext = findViewById(R.id.btnNext);
         btnBack = findViewById(R.id.btnBack);
 
@@ -102,6 +110,19 @@ public class PhonicsActivity extends AppCompatActivity {
             }
         });
 
+        btnPrevious.setOnClickListener(v -> {
+            if (items != null && index > 0) {
+                index--;
+                updateUI();
+            }
+        });
+
+        btnSoundOut.setOnClickListener(v -> {
+            if (items != null && index < items.length) {
+                speakSoundOut(items[index]);
+            }
+        });
+
         btnBack.setOnClickListener(v -> finish());
         
         updateUI();
@@ -121,16 +142,66 @@ public class PhonicsActivity extends AppCompatActivity {
 
         if (items.length == 0) {
             tvWord.setText("Mastered!");
+            btnPrevious.setEnabled(false);
+            btnNext.setEnabled(false);
         }
     }
 
     private void updateUI() {
+        btnPrevious.setEnabled(items != null && index > 0);
+        btnNext.setEnabled(items != null && items.length > 0);
+
         if (items == null || items.length == 0 || index >= items.length) return;
         tvWord.setText(items[index]);
         if (tvFeedback != null) tvFeedback.setText("");
         
+        updateWordImage(items[index]);
+        
         // Track seen status immediately
         learningEngine.markAsSeen(items[index]);
+    }
+
+    // Sound out the word letter by letter, then say the whole word.
+    private void speakSoundOut(String word) {
+        if (word == null || word.trim().length() == 0 || tts == null) return;
+        String clean = word.trim().toLowerCase(Locale.US);
+        tts.stop();
+
+        boolean first = true;
+        for (int i = 0; i < clean.length(); i++) {
+            char c = clean.charAt(i);
+            if (c == ' ') continue;
+            tts.speak(String.valueOf(c), first ? TextToSpeech.QUEUE_FLUSH : TextToSpeech.QUEUE_ADD, null, null);
+            first = false;
+        }
+        tts.speak(word.trim(), first ? TextToSpeech.QUEUE_FLUSH : TextToSpeech.QUEUE_ADD, null, null);
+    }
+
+    private void updateWordImage(String text) {
+        if (ivWordImage == null || text == null) return;
+        String cleanName = text.toLowerCase().replaceAll("[^a-z]", "").trim();
+        int resId = getResources().getIdentifier(cleanName + "_image", "drawable", getPackageName());
+        if (resId == 0) resId = getResources().getIdentifier(cleanName + "_real", "drawable", getPackageName());
+        if (resId == 0) resId = getResources().getIdentifier(cleanName, "drawable", getPackageName());
+
+        if (resId == 0) {
+            String[] words = text.toLowerCase().split("\\s+");
+            for (String w : words) {
+                String keyword = w.replaceAll("[^a-z]", "");
+                if (keyword.isEmpty()) continue;
+                resId = getResources().getIdentifier(keyword + "_image", "drawable", getPackageName());
+                if (resId == 0) resId = getResources().getIdentifier(keyword + "_real", "drawable", getPackageName());
+                if (resId == 0) resId = getResources().getIdentifier(keyword, "drawable", getPackageName());
+                if (resId != 0) break;
+            }
+        }
+
+        if (resId != 0) {
+            Glide.with(this).load(resId).into(ivWordImage);
+            ivWordImage.setVisibility(View.VISIBLE);
+        } else {
+            ivWordImage.setVisibility(View.GONE);
+        }
     }
 
     private void initializeSpeechRecognizer() {
@@ -196,6 +267,8 @@ public class PhonicsActivity extends AppCompatActivity {
             
             // MASTERED: Save permanently to history
             learningEngine.markCompleted(items[index]);
+
+            ConfettiView.show(this, tts);
             
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (index < items.length - 1) {

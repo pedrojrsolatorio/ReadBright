@@ -96,18 +96,72 @@
         <item>Knowledge</item><item>Education</item><item>Experience</item><item>Confidence</item><item>Discovery</item>
     </string-array>
 
-    <!-- Stories -->
-    <string-array name="beginner_titles"><item>The Little Red Ball</item></string-array>
-    <string-array name="beginner_stories"><item>Tim has a little red ball. He plays with it in the park. The ball rolls fast and Tim runs to catch it. He is very happy.</item></string-array>
-    <string-array name="beginner_images"><item>@drawable/ball_image</item></string-array>
+    <!-- Rhyming Words -->
+    <string-array name="beginner_titles">
+        <item>Cat Family (-at)</item>
+        <item>Dog Family (-og)</item>
+        <item>Sun Family (-un)</item>
+        <item>Ball Family (-all)</item>
+        <item>Pen Family (-en)</item>
+    </string-array>
+    <string-array name="beginner_stories">
+        <item>Cat • Bat • Hat • Mat • Rat • Sat</item>
+        <item>Dog • Log • Fog • Frog • Jog • Hog</item>
+        <item>Sun • Fun • Run • Bun • Nun • Gun</item>
+        <item>Ball • Call • Hall • Fall • Tall • Wall</item>
+        <item>Pen • Hen • Ten • Men • Den • Ben</item>
+    </string-array>
+    <string-array name="beginner_images">
+        <item>@drawable/cat_image</item>
+        <item>@drawable/dog_real</item>
+        <item>@drawable/sun_image</item>
+        <item>@drawable/ball_image</item>
+        <item>@drawable/box_image</item>
+    </string-array>
 
-    <string-array name="intermediate_titles"><item>A Day at the Garden</item></string-array>
-    <string-array name="intermediate_stories"><item>Sarah loves flowers. She goes to the garden every morning. She waters the plants and watches the butterflies fly around. The garden looks beautiful.</item></string-array>
-    <string-array name="intermediate_images"><item>@drawable/cat_image</item></string-array>
+    <string-array name="intermediate_titles">
+        <item>Clock Family (-ock)</item>
+        <item>Pig Family (-ig)</item>
+        <item>Box Family (-ox)</item>
+        <item>Egg Family (-egg)</item>
+        <item>Chair Family (-air)</item>
+    </string-array>
+    <string-array name="intermediate_stories">
+        <item>Clock • Block • Lock • Rock • Sock • Dock</item>
+        <item>Pig • Big • Dig • Fig • Wig • Twig</item>
+        <item>Box • Fox • Pox • Sox</item>
+        <item>Egg • Leg • Beg • Peg</item>
+        <item>Chair • Pair • Hair • Fair • Stair • Bear</item>
+    </string-array>
+    <string-array name="intermediate_images">
+        <item>@drawable/clock_image</item>
+        <item>@drawable/pig_image</item>
+        <item>@drawable/box_image</item>
+        <item>@drawable/egg_image</item>
+        <item>@drawable/chair_image</item>
+    </string-array>
 
-    <string-array name="advanced_titles"><item>The Brave Little Whale</item></string-array>
-    <string-array name="advanced_stories"><item>Deep in the ocean, there lived a brave little whale named Wally. Wally loved to explore new places and meet new friends. One day, he helped a lost ship find its way back home.</item></string-array>
-    <string-array name="advanced_images"><item>@drawable/whale_image</item></string-array>
+    <string-array name="advanced_titles">
+        <item>Whale Family (-ale)</item>
+        <item>Bread Family (-ead)</item>
+        <item>Umbrella Family (-ella)</item>
+        <item>Ship Family (-ip)</item>
+        <item>Thumb Family (-umb)</item>
+    </string-array>
+    <string-array name="advanced_stories">
+        <item>Whale • Tail • Sail • Pale • Mail • Scale</item>
+        <item>Bread • Red • Bed • Head • Thread • Spread</item>
+        <item>Umbrella • Stella • Bella • Ella</item>
+        <item>Ship • Clip • Flip • Skip • Trip • Zip</item>
+        <item>Thumb • Crumb • Plumb • Drum</item>
+    </string-array>
+    <string-array name="advanced_images">
+        <item>@drawable/whale_image</item>
+        <item>@drawable/bread_image</item>
+        <item>@drawable/umbrella_image</item>
+        <item>@drawable/ship_image</item>
+        <item>@drawable/thumb_image</item>
+    </string-array>
 
     <!-- AI Reading Tutor and Spelling arrays remain unchanged -->
     <string-array name="reading_ai_g1"><item>Apple</item><item>Ball</item><item>Cat</item><item>Dog</item><item>Egg</item><item>Fan</item><item>Map</item><item>Net</item></string-array>

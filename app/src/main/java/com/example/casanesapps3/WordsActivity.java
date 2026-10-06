@@ -58,10 +58,6 @@ public class WordsActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btnNext);
         btnBack = findViewById(R.id.btnBack);
 
-        if (btnPrevious != null) {
-            btnPrevious.setVisibility(View.GONE);
-        }
-
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
         username = preferences.getString("current_user", "");
         userGrade = getIntent().getStringExtra("grade");
@@ -204,6 +200,8 @@ public class WordsActivity extends AppCompatActivity {
             
             // MASTERED: Move to history (Never show again)
             wordEngine.markWordCompleted(words[index]);
+
+            ConfettiView.show(this, tts);
             
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (index < words.length - 1) {

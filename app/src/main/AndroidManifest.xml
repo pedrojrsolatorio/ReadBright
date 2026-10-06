@@ -48,6 +48,7 @@
         <activity android:name=".WordsActivity" />
         <activity android:name=".SentenceActivity" />
         <activity android:name=".StoryActivity" />
+        <activity android:name=".RhymingActivity" />
         <activity android:name=".SpellingActivity" />
         <activity android:name=".AssessmentActivity" />
         <activity android:name=".AssessmentResultActivity" />

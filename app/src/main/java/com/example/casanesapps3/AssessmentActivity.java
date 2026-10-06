@@ -214,6 +214,7 @@ public class AssessmentActivity extends AppCompatActivity {
             score++; 
             tvFeedback.setText(R.string.correct_feedback); 
             tvFeedback.setTextColor(Color.parseColor("#388E3C"));
+            ConfettiView.show(this, textToSpeech);
         } else {
             tvFeedback.setText(R.string.incorrect_better_next_time); 
             tvFeedback.setTextColor(Color.RED);

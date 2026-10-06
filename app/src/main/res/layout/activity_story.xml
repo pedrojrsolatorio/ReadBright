@@ -90,18 +90,39 @@
             android:minHeight="20dp"/>
 
         <!-- Control Buttons -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReadAloud"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:text="@string/read_aloud"
-            app:backgroundTint="#1976D2"
-            app:cornerRadius="16dp"
-            android:paddingHorizontal="32dp"
-            android:layout_marginBottom="20dp"
-            android:textAllCaps="false"
-            app:icon="@android:drawable/ic_lock_silent_mode_off"
-            app:iconGravity="textStart"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReadAloud"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="@string/read_aloud"
+                app:backgroundTint="#1976D2"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"
+                app:icon="@android:drawable/ic_lock_silent_mode_off"
+                app:iconGravity="textStart"/>
+
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMic"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:text="🎤 Speak"
+                app:backgroundTint="#FF9800"
+                app:cornerRadius="16dp"
+                android:textAllCaps="false"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

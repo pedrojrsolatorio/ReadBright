@@ -117,7 +117,7 @@ public class ParentDashboardActivity extends AppCompatActivity {
         updateStatusText(tvStatusPhonics, preferences.getBoolean(childUsername + "_phonics_" + grade + "_completed", false), "Phonics");
         updateStatusText(tvStatusWords, preferences.getBoolean(childUsername + "_words_" + grade + "_completed", false), "Words");
         updateStatusText(tvStatusSentences, preferences.getBoolean(childUsername + "_sentences_" + grade + "_completed", false), "Sentences");
-        updateStatusText(tvStatusStories, preferences.getBoolean(childUsername + "_story_" + grade + "_completed", false), "Stories");
+        updateStatusText(tvStatusStories, preferences.getBoolean(childUsername + "_story_" + grade + "_completed", false), "Rhyming");
     }
 
     private void updateStatusText(TextView tv, boolean isCompleted, String moduleName) {

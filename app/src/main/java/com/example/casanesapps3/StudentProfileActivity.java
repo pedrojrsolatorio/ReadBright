@@ -96,7 +96,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             setModuleStatus(tvStatusPhonics, preferences.getBoolean(username + "_phonics_" + grade + "_completed", false), "Phonics");
             setModuleStatus(tvStatusWords, preferences.getBoolean(username + "_words_" + grade + "_completed", false), "Words");
             setModuleStatus(tvStatusSentences, preferences.getBoolean(username + "_sentences_" + grade + "_completed", false), "Sentences");
-            setModuleStatus(tvStatusStories, preferences.getBoolean(username + "_story_" + grade + "_completed", false), "Stories");
+            setModuleStatus(tvStatusStories, preferences.getBoolean(username + "_story_" + grade + "_completed", false), "Rhyming");
         }
     }
 

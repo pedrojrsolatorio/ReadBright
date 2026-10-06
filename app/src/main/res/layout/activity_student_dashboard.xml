@@ -107,7 +107,7 @@
                 android:layout_height="100dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="8dp"
-                android:text="Stories"
+                android:text="Rhyming Words"
                 app:backgroundTint="#E91E63"
                 app:cornerRadius="16dp"/>
 

@@ -31,7 +31,7 @@ public class ReadingAIActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private TextView tvTargetText, tvFeedback;
-    private Button btnListen, btnMic, btnNext, btnBack;
+    private Button btnListen, btnMic, btnPrevious, btnNext, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -51,6 +51,7 @@ public class ReadingAIActivity extends AppCompatActivity {
         tvFeedback = findViewById(R.id.tvFeedback);
         btnListen = findViewById(R.id.btnListen);
         btnMic = findViewById(R.id.btnMic);
+        btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
         btnBack = findViewById(R.id.btnBack);
 
@@ -95,6 +96,13 @@ public class ReadingAIActivity extends AppCompatActivity {
             }
         });
 
+        btnPrevious.setOnClickListener(v -> {
+            if (words != null && index > 0) {
+                index--;
+                updateUI();
+            }
+        });
+
         btnBack.setOnClickListener(v -> finish());
     }
 
@@ -107,6 +115,8 @@ public class ReadingAIActivity extends AppCompatActivity {
         if (words.length == 0) {
             tvTargetText.setText("Done!");
             Toast.makeText(this, "Mastered all words!", Toast.LENGTH_SHORT).show();
+            btnPrevious.setEnabled(false);
+            btnNext.setEnabled(false);
             return;
         }
         updateUI();
@@ -120,6 +130,8 @@ public class ReadingAIActivity extends AppCompatActivity {
             // Mark as seen immediately when shown
             wordEngine.markWordAsSeen(words[index]);
         }
+        btnPrevious.setEnabled(index > 0);
+        btnNext.setEnabled(words.length > 0);
     }
 
     private void initializeSpeechRecognizer() {
@@ -184,6 +196,8 @@ public class ReadingAIActivity extends AppCompatActivity {
 
             // MASTERED: Will never cycle back
             wordEngine.markWordCompleted(words[index]);
+
+            ConfettiView.show(this, tts);
 
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (index < words.length - 1) {

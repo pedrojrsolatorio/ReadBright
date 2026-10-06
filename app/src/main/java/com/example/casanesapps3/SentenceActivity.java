@@ -31,7 +31,7 @@ public class SentenceActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private TextView tvSentence, tvFeedback;
-    private Button btnSpeak, btnMic, btnNext, btnBack;
+    private Button btnSpeak, btnMic, btnPrevious, btnNext, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -54,6 +54,7 @@ public class SentenceActivity extends AppCompatActivity {
         tvFeedback = findViewById(R.id.tvFeedback);
         btnSpeak = findViewById(R.id.btnSpeak);
         btnMic = findViewById(R.id.btnMic);
+        btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
         btnBack = findViewById(R.id.btnBack);
 
@@ -104,6 +105,13 @@ public class SentenceActivity extends AppCompatActivity {
             }
         });
 
+        btnPrevious.setOnClickListener(v -> {
+            if (sentences != null && index > 0) {
+                index--;
+                updateUI();
+            }
+        });
+
         btnBack.setOnClickListener(v -> finish());
         
         updateUI();
@@ -123,10 +131,15 @@ public class SentenceActivity extends AppCompatActivity {
 
         if (sentences.length == 0) {
             tvSentence.setText("All Mastered!");
+            btnPrevious.setEnabled(false);
+            btnNext.setEnabled(false);
         }
     }
 
     private void updateUI() {
+        btnPrevious.setEnabled(sentences != null && index > 0);
+        btnNext.setEnabled(sentences != null && sentences.length > 0);
+
         if (sentences == null || sentences.length == 0 || index >= sentences.length) return;
         tvSentence.setText(sentences[index]);
         if (tvFeedback != null) tvFeedback.setText("");
@@ -198,6 +211,8 @@ public class SentenceActivity extends AppCompatActivity {
             
             // MASTERED: Move permanently to history
             learningEngine.markCompleted(sentences[index]);
+
+            ConfettiView.show(this, tts);
             
             new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if (index < sentences.length - 1) {

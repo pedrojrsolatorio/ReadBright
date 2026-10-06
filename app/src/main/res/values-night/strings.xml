@@ -5,5 +5,5 @@
     <string name="phonics_not_started">Phonics: ❌ Not Started</string>
     <string name="words_not_started">Words: ❌ Not Started</string>
     <string name="sentences_not_started">Sentences: ❌ Not Started</string>
-    <string name="stories_not_started">Stories: ❌ Not Started</string>
+    <string name="stories_not_started">Rhyming: ❌ Not Started</string>
 </resources>
