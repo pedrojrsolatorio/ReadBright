@@ -31,7 +31,7 @@ public class SentenceActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
     private TextView tvSentence, tvFeedback;
-    private Button btnSpeak, btnMic, btnPrevious, btnNext, btnBack;
+    private Button btnSpeak, btnMic, btnPrevious, btnNext, btnStartOver, btnBack;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -56,6 +56,7 @@ public class SentenceActivity extends AppCompatActivity {
         btnMic = findViewById(R.id.btnMic);
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
+        btnStartOver = findViewById(R.id.btnStartOver);
         btnBack = findViewById(R.id.btnBack);
 
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
@@ -113,6 +114,11 @@ public class SentenceActivity extends AppCompatActivity {
         });
 
         btnBack.setOnClickListener(v -> finish());
+
+        btnStartOver.setOnClickListener(v -> {
+            learningEngine.clearProgress();
+            setupSentencesList();
+        });
         
         updateUI();
     }
@@ -133,9 +139,15 @@ public class SentenceActivity extends AppCompatActivity {
             tvSentence.setText("All Mastered!");
             btnPrevious.setEnabled(false);
             btnNext.setEnabled(false);
+            if (btnSpeak != null) btnSpeak.setEnabled(false);
+            if (btnMic != null) btnMic.setEnabled(false);
+            if (btnStartOver != null) btnStartOver.setVisibility(View.VISIBLE);
             return;
         }
 
+        if (btnSpeak != null) btnSpeak.setEnabled(true);
+        if (btnMic != null) btnMic.setEnabled(true);
+        if (btnStartOver != null) btnStartOver.setVisibility(View.GONE);
         updateUI();
     }
 

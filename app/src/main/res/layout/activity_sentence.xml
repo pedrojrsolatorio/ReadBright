@@ -98,15 +98,26 @@
                 android:layout_width="16dp"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Next"
-                android:textAllCaps="false"/>
+<Button
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next"
+            android:textAllCaps="false"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStartOver"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Start Over"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#2E7D32"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btnBack"
