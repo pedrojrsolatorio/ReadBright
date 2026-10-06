@@ -41,6 +41,7 @@ public class SpellingActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private TextView tvFeedback;
     private ImageView ivWordImage;
+    private TextView tvEmojiFallback;
     private LinearLayout layoutAnswerSlots;
     private GridLayout layoutKeyboard;
     private TextToSpeech textToSpeech;
@@ -58,6 +59,8 @@ public class SpellingActivity extends AppCompatActivity {
     private String currentTargetWord = "";
     private char[] userGuess;
     private final List<Character> keyboardLetters = new ArrayList<>();
+    private final List<Button> keyboardButtons = new ArrayList<>();
+    private final int[] keyRemaining = new int[26];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class SpellingActivity extends AppCompatActivity {
         TextView tvGradeInfo = findViewById(R.id.tvGradeInfo);
         tvFeedback = findViewById(R.id.tvFeedback);
         ivWordImage = findViewById(R.id.ivWordImage);
+        tvEmojiFallback = findViewById(R.id.tvEmojiFallback);
         layoutAnswerSlots = findViewById(R.id.layoutAnswerSlots);
         layoutKeyboard = findViewById(R.id.layoutKeyboard);
         Button btnListen = findViewById(R.id.btnListen);
@@ -162,7 +166,11 @@ public class SpellingActivity extends AppCompatActivity {
         } else {
             tvFeedback.setText("Try Again");
             tvFeedback.setTextColor(Color.RED);
+            for (char g : userGuess) {
+                if (g != ' ') keyRemaining[g - 'A']++;
+            }
             Arrays.fill(userGuess, ' ');
+            refreshKeyboardButtons();
             renderAnswerSlots();
         }
     }
@@ -189,8 +197,16 @@ public class SpellingActivity extends AppCompatActivity {
         if (resId != 0) {
             Glide.with(this).load(resId).into(ivWordImage);
             ivWordImage.setVisibility(View.VISIBLE);
+            tvEmojiFallback.setVisibility(View.GONE);
         } else {
             ivWordImage.setVisibility(View.GONE);
+            String emoji = EmojiLookup.emojiFor(currentTargetWord);
+            if (emoji != null) {
+                tvEmojiFallback.setText(emoji);
+                tvEmojiFallback.setVisibility(View.VISIBLE);
+            } else {
+                tvEmojiFallback.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -203,6 +219,8 @@ public class SpellingActivity extends AppCompatActivity {
             keyboardLetters.add(randomLetter);
         }
         Collections.shuffle(keyboardLetters);
+        Arrays.fill(keyRemaining, 0);
+        for (char c : keyboardLetters) keyRemaining[c - 'A']++;
     }
 
     private void renderAnswerSlots() {
@@ -218,12 +236,15 @@ public class SpellingActivity extends AppCompatActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
             params.setMargins(margin, margin, margin, margin);
             slot.setLayoutParams(params);
+            final int idx = i;
+            slot.setOnClickListener(v -> removeLetterFromGuess(idx));
             layoutAnswerSlots.addView(slot);
         }
     }
 
     private void renderKeyboard() {
         layoutKeyboard.removeAllViews();
+        keyboardButtons.clear();
         int size = dpToPx(40), margin = dpToPx(2);
         for (char c : keyboardLetters) {
             Button btn = new Button(this);
@@ -235,14 +256,30 @@ public class SpellingActivity extends AppCompatActivity {
             params.setMargins(margin, margin, margin, margin);
             btn.setLayoutParams(params);
             btn.setOnClickListener(v -> addLetterToGuess(c));
+            keyboardButtons.add(btn);
             layoutKeyboard.addView(btn);
+        }
+        refreshKeyboardButtons();
+    }
+
+    private void refreshKeyboardButtons() {
+        for (Button btn : keyboardButtons) {
+            int idx = btn.getText().charAt(0) - 'A';
+            boolean available = idx >= 0 && idx < 26 && keyRemaining[idx] > 0;
+            btn.setEnabled(available);
+            btn.setAlpha(available ? 1f : 0.4f);
+            btn.setBackgroundColor(available ? Color.parseColor("#FF9800") : Color.parseColor("#BDBDBD"));
         }
     }
 
     private void addLetterToGuess(char c) {
+        int idx = c - 'A';
+        if (idx < 0 || idx >= 26 || keyRemaining[idx] <= 0) return;
         for (int i = 0; i < userGuess.length; i++) {
             if (userGuess[i] == ' ') {
                 userGuess[i] = c;
+                keyRemaining[idx]--;
+                refreshKeyboardButtons();
                 renderAnswerSlots();
                 boolean full = true;
                 for (char g : userGuess) { if (g == ' ') { full = false; break; } }
@@ -250,6 +287,16 @@ public class SpellingActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private void removeLetterFromGuess(int index) {
+        if ("Correct!".equals(tvFeedback.getText().toString())) return;
+        if (index < 0 || index >= userGuess.length || userGuess[index] == ' ') return;
+        char c = userGuess[index];
+        userGuess[index] = ' ';
+        keyRemaining[c - 'A']++;
+        refreshKeyboardButtons();
+        renderAnswerSlots();
     }
 
     private void speakWord() {

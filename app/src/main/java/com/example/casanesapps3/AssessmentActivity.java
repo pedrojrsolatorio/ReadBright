@@ -32,7 +32,7 @@ public class AssessmentActivity extends AppCompatActivity {
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
-    private TextView tvQuestion, tvQuestionCount, tvFeedback, tvReadingStatus;
+    private TextView tvQuestion, tvQuestionCount, tvFeedback, tvReadingStatus, tvEmojiFallback;
     private ImageView ivQuestionImage;
     private LinearLayout layoutReading, layoutSpelling;
     private Button btnSubmit;
@@ -63,6 +63,7 @@ public class AssessmentActivity extends AppCompatActivity {
         tvFeedback = findViewById(R.id.tvFeedback);
         tvReadingStatus = findViewById(R.id.tvReadingStatus);
         ivQuestionImage = findViewById(R.id.ivQuestionImage);
+        tvEmojiFallback = findViewById(R.id.tvEmojiFallback);
         layoutReading = findViewById(R.id.layoutReading);
         layoutSpelling = findViewById(R.id.layoutSpelling);
         Button btnMic = findViewById(R.id.btnMic);
@@ -187,8 +188,16 @@ public class AssessmentActivity extends AppCompatActivity {
         if (resId != 0) {
             ivQuestionImage.setImageResource(resId);
             ivQuestionImage.setVisibility(View.VISIBLE);
+            tvEmojiFallback.setVisibility(View.GONE);
         } else {
             ivQuestionImage.setVisibility(View.GONE);
+            String emoji = EmojiLookup.emojiFor(text);
+            if (emoji != null) {
+                tvEmojiFallback.setText(emoji);
+                tvEmojiFallback.setVisibility(View.VISIBLE);
+            } else {
+                tvEmojiFallback.setVisibility(View.GONE);
+            }
         }
     }
 

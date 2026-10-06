@@ -70,6 +70,16 @@
                 android:contentDescription="Question Image" />
 
             <TextView
+                android:id="@+id/tvEmojiFallback"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:textSize="100sp"
+                android:text=""
+                android:visibility="gone"
+                android:contentDescription="Question Image" />
+
+            <TextView
                 android:id="@+id/tvQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

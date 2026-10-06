@@ -51,6 +51,16 @@
                 android:visibility="visible"
                 android:contentDescription="@string/spelling_word_image_desc" />
 
+            <TextView
+                android:id="@+id/tvEmojiFallback"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:textSize="110sp"
+                android:text=""
+                android:visibility="gone"
+                android:contentDescription="@string/spelling_word_image_desc" />
+
             <Button
                 android:id="@+id/btnListen"
                 android:layout_width="wrap_content"
