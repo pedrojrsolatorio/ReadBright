@@ -84,18 +84,6 @@
             android:textAllCaps="false"
             app:elevation="4dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnParent"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:text="@string/parent_login"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:backgroundTint="#1976D2"
-            app:cornerRadius="24dp"
-            android:textAllCaps="false"
-            app:elevation="4dp"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

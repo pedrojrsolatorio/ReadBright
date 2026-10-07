@@ -53,11 +53,6 @@
         <activity android:name=".AssessmentActivity" />
         <activity android:name=".AssessmentResultActivity" />
 
-        <!-- Parent Activities -->
-        <activity android:name=".ParentLoginActivity" />
-        <activity android:name=".ParentRegisterActivity" />
-        <activity android:name=".ParentDashboardActivity" />
-
     </application>
 
 </manifest>

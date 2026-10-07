@@ -33,7 +33,6 @@
     <string name="settings_saved">Settings Saved!</string>
     <string name="login_welcome">Welcome %1$s (%2$s)</string>
     <string name="not_student_account">This is not a Student account</string>
-    <string name="not_parent_account">This is not a Parent account</string>
     <string name="invalid_credentials">Invalid Username or Password</string>
     <string name="enter_username">Enter Username</string>
     <string name="enter_password">Enter Password</string>
@@ -68,7 +67,6 @@
     <string name="motto">Personalized Learning\nfor a Brighter Future</string>
     <string name="get_started">Get Started</string>
     <string name="student_login">Student Login</string>
-    <string name="parent_login">Parent Login</string>
     <string name="enter_student_id">Enter your student ID</string>
     <string name="forgot_password_q">Forgot password?</string>
     <string name="dont_have_account">Don\'t have an account?</string>
@@ -140,23 +138,6 @@
     <string name="score_label">Score: %1$s</string>
     <string name="earned_stars_msg">You earned %1$d stars!</string>
 
-    <!-- Parent -->
-    <string name="parent">Parent</string>
-    <string name="parent_welcome">Welcome, %1$s!</string>
-    <string name="progress_updated">Progress updated!</string>
-    <string name="no_child_linked">No child linked yet</string>
-    <string name="no_assessment_yet">No assessment yet</string>
-    <string name="child_name_label">Child Name: %1$s</string>
-    <string name="child_grade_label">Grade: %1$s</string>
-    <string name="last_assess_score_label">Last Assessment: %1$s</string>
-    <string name="last_spelling_score_label">Last Spelling: %1$s</string>
-    <string name="total_stars_label">Total Stars: %1$d</string>
-    <string name="parent_login_success">Parent login successful!</string>
-    <string name="forgot_password_title">Forgot Password</string>
-    <string name="enter_registered_name">Enter registered name</string>
-    <string name="invalid_stu_id">Invalid Student ID</string>
-    <string name="user_exists">User already exists</string>
-    <string name="parent_reg_success">Parent registration successful for child: %1$s</string>
     <string name="profile_student_name">Student Name</string>
 
     <!-- Student Registration -->

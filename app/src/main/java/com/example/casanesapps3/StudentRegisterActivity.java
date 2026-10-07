@@ -114,7 +114,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             boolean inserted = dbHelper.addUser(studentId, username, password, name, grade, "student", birthday, gender, age);
 
             if (inserted) {
-                showSuccessDialog(studentId, name);
+                showSuccessDialog(name);
             } else {
                 Toast.makeText(this, "Registration failed. Try again.", Toast.LENGTH_SHORT).show();
             }
@@ -128,10 +128,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
         return "STU" + number;
     }
 
-    private void showSuccessDialog(String studentId, String name) {
+    private void showSuccessDialog(String name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Registration Successful");
-        builder.setMessage("Welcome " + name + "!\nYour Student ID is: " + studentId + "\nPlease share this ID with your parent.");
+        builder.setMessage("Welcome " + name + "!\nRegistration successful.");
         builder.setCancelable(false);
         builder.setPositiveButton("Got it", (dialog, which) -> finish());
         builder.show();

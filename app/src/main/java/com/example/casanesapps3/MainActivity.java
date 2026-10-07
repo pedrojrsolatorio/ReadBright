@@ -13,15 +13,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnStudent = findViewById(R.id.btnStudent);
-        Button btnParent = findViewById(R.id.btnParent);
 
         btnStudent.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StudentLoginActivity.class);
-            startActivity(intent);
-        });
-
-        btnParent.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ParentLoginActivity.class);
             startActivity(intent);
         });
     }
