@@ -35,10 +35,18 @@ public class AssessmentResultActivity extends AppCompatActivity {
         int gradBonus = getIntent().getIntExtra("grad_bonus", 0);
         String nextGrade = getIntent().getStringExtra("next_grade");
 
+        boolean passed = total > 0 && (score * 100.0 / total) >= 80;
+        int earned = stars + bonus;
         tvFinalScore.setText(getString(R.string.score_label, score + "/" + total));
-        tvStarsEarned.setText(getString(R.string.earned_stars_msg, stars + bonus));
-        if (bonus > 0) {
-            tvStarsEarned.append(" (+" + bonus + " bonus)");
+        if (earned > 0) {
+            tvStarsEarned.setText(getString(R.string.earned_stars_msg, earned));
+            if (bonus > 0) {
+                tvStarsEarned.append(" (+" + bonus + " bonus)");
+            }
+        } else if (passed) {
+            tvStarsEarned.setText("You already earned this grade's stars!");
+        } else {
+            tvStarsEarned.setText("Keep trying! You earn stars when you pass.");
         }
 
         if (promoted && nextGrade != null) {

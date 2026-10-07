@@ -1,6 +1,7 @@
 package com.example.casanesapps3;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -86,6 +87,22 @@ public class AssessmentActivity extends AppCompatActivity {
         
         if (tvGradeInfo != null) {
             tvGradeInfo.setText(getString(R.string.assessment_title, currentGrade));
+        }
+
+        ArrayList<String> missing = findMissingModules();
+        if (!missing.isEmpty()) {
+            StringBuilder sb = new StringBuilder("Complete all lessons in Learning Progress before the assessment.\n\nMissing: ");
+            for (int i = 0; i < missing.size(); i++) {
+                if (i > 0) sb.append(", ");
+                sb.append(missing.get(i));
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Finish your lessons first!")
+                    .setMessage(sb.toString())
+                    .setCancelable(false)
+                    .setPositiveButton("OK", (dialog, which) -> finish())
+                    .show();
+            return;
         }
 
         setupQuestions(currentGrade);
@@ -325,12 +342,21 @@ public class AssessmentActivity extends AppCompatActivity {
         }
     }
 
+    private ArrayList<String> findMissingModules() {
+        SharedPreferences prefs = getSharedPreferences("UserDatabase", MODE_PRIVATE);
+        ArrayList<String> missing = new ArrayList<>();
+        if (!prefs.getBoolean(username + "_phonics_" + currentGrade + "_completed", false)) missing.add("Phonics");
+        if (!prefs.getBoolean(username + "_words_" + currentGrade + "_completed", false)) missing.add("Words");
+        if (!prefs.getBoolean(username + "_sentences_" + currentGrade + "_completed", false)) missing.add("Sentences");
+        if (!prefs.getBoolean(username + "_story_" + currentGrade + "_completed", false)) missing.add("Rhyming");
+        if (currentGrade.equalsIgnoreCase("Grade 1") && !prefs.getBoolean(username + "_alphabet_completed", false)) missing.add("Alphabet");
+        return missing;
+    }
+
     private void saveScoreAndGoToResults() {
-        int starsEarned = score * 20;
-        
-        // Save stars to SQLite
-        dbHelper.addStars(username, starsEarned);
-        
+        int scoreStars = score * 20;
+        int starsGranted = 0;
+
         // Logic for Promotion (Proceed to next Grade)
         double percentage = ((double) score / questionList.size()) * 100;
         boolean promoted = false;
@@ -357,11 +383,12 @@ public class AssessmentActivity extends AppCompatActivity {
                 editor.apply();
             }
 
-            // One-time first-pass bonus: +100 stars (once per grade)
+            // First pass of this grade only: score stars + 100 bonus, once ever
             SharedPreferences prefs = getSharedPreferences("UserDatabase", MODE_PRIVATE);
             String passKey = username + "_assessment_" + currentGrade + "_passed";
             if (!prefs.getBoolean(passKey, false)) {
-                dbHelper.addStars(username, 100);
+                starsGranted = scoreStars;
+                dbHelper.addStars(username, starsGranted + 100);
                 prefs.edit().putBoolean(passKey, true).apply();
                 bonusEarned += 100;
             }
@@ -378,7 +405,7 @@ public class AssessmentActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AssessmentResultActivity.class);
         intent.putExtra("score", score);
         intent.putExtra("total", questionList.size());
-        intent.putExtra("stars", starsEarned);
+        intent.putExtra("stars", starsGranted);
         intent.putExtra("promoted", promoted);
         intent.putExtra("graduated", graduated);
         intent.putExtra("bonus", bonusEarned);
