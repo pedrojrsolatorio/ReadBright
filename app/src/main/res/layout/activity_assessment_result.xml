@@ -66,6 +66,19 @@
             android:textStyle="bold"
             android:textColor="#1976D2"
             android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
+
+        <!-- Graduation Message View -->
+        <TextView
+            android:id="@+id/tvGraduationMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uD83C\uDF93 Congratulations, Graduate! \uD83C\uDF93\nYou passed Grade 6!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FF8F00"
+            android:gravity="center"
             android:layout_marginBottom="30dp"
             android:visibility="gone"/>
 

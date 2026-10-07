@@ -189,4 +189,16 @@
     <string-array name="assess_g5_types"><item>READING</item><item>SPELLING</item></string-array>
     <string-array name="assess_g5_instructions"><item>Read the paragraph:</item><item>Spell this word:</item></string-array>
     <string-array name="assess_g5_content"><item>Nature is full of surprises and beauty.</item><item>Mountain</item></string-array>
+
+    <string-array name="assess_g2_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g2_instructions"><item>Read the sentence:</item><item>Spell this word:</item></string-array>
+    <string-array name="assess_g2_content"><item>The dog runs in the sun.</item><item>Apple</item></string-array>
+
+    <string-array name="assess_g4_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g4_instructions"><item>Read the paragraph:</item><item>Spell this word:</item></string-array>
+    <string-array name="assess_g4_content"><item>Yesterday we visited the village and climbed the mountain.</item><item>Garden</item></string-array>
+
+    <string-array name="assess_g6_types"><item>READING</item><item>SPELLING</item></string-array>
+    <string-array name="assess_g6_instructions"><item>Read the paragraph:</item><item>Spell this word:</item></string-array>
+    <string-array name="assess_g6_content"><item>Technology and communication shape the way we learn and live.</item><item>Experience</item></string-array>
 </resources>

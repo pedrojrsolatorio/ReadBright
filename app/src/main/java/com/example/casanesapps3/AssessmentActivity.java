@@ -113,14 +113,26 @@ public class AssessmentActivity extends AppCompatActivity {
     private void setupQuestions(String grade) {
         int typesRes, instRes, contRes;
 
-        if (grade.contains("3") || grade.contains("4")) {
-            typesRes = R.array.assess_g3_types;
-            instRes = R.array.assess_g3_instructions;
-            contRes = R.array.assess_g3_content;
-        } else if (grade.contains("5") || grade.contains("6")) {
+        if (grade.contains("6")) {
+            typesRes = R.array.assess_g6_types;
+            instRes = R.array.assess_g6_instructions;
+            contRes = R.array.assess_g6_content;
+        } else if (grade.contains("5")) {
             typesRes = R.array.assess_g5_types;
             instRes = R.array.assess_g5_instructions;
             contRes = R.array.assess_g5_content;
+        } else if (grade.contains("4")) {
+            typesRes = R.array.assess_g4_types;
+            instRes = R.array.assess_g4_instructions;
+            contRes = R.array.assess_g4_content;
+        } else if (grade.contains("3")) {
+            typesRes = R.array.assess_g3_types;
+            instRes = R.array.assess_g3_instructions;
+            contRes = R.array.assess_g3_content;
+        } else if (grade.contains("2")) {
+            typesRes = R.array.assess_g2_types;
+            instRes = R.array.assess_g2_instructions;
+            contRes = R.array.assess_g2_content;
         } else {
             typesRes = R.array.assess_g1_types;
             instRes = R.array.assess_g1_instructions;
@@ -322,6 +334,7 @@ public class AssessmentActivity extends AppCompatActivity {
         // Logic for Promotion (Proceed to next Grade)
         double percentage = ((double) score / questionList.size()) * 100;
         boolean promoted = false;
+        boolean graduated = false;
         String nextGrade = "";
 
         if (percentage >= 80) { // Passing score is 80%
@@ -330,6 +343,7 @@ public class AssessmentActivity extends AppCompatActivity {
             else if (currentGrade.equalsIgnoreCase("Grade 3")) nextGrade = "Grade 4";
             else if (currentGrade.equalsIgnoreCase("Grade 4")) nextGrade = "Grade 5";
             else if (currentGrade.equalsIgnoreCase("Grade 5")) nextGrade = "Grade 6";
+            else if (currentGrade.equalsIgnoreCase("Grade 6")) graduated = true;
 
             if (!nextGrade.isEmpty()) {
                 dbHelper.updateUserGrade(username, nextGrade);
@@ -347,6 +361,7 @@ public class AssessmentActivity extends AppCompatActivity {
         intent.putExtra("total", questionList.size());
         intent.putExtra("stars", starsEarned);
         intent.putExtra("promoted", promoted);
+        intent.putExtra("graduated", graduated);
         intent.putExtra("next_grade", nextGrade);
         startActivity(intent);
         finish();

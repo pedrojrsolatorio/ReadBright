@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AssessmentResultActivity extends AppCompatActivity {
 
-    private TextView tvFinalScore, tvStarsEarned, tvPromotionMsg;
+    private TextView tvFinalScore, tvStarsEarned, tvPromotionMsg, tvGraduationMsg;
     private Button btnDone;
 
     @Override
@@ -22,6 +22,7 @@ public class AssessmentResultActivity extends AppCompatActivity {
         tvFinalScore = findViewById(R.id.tvFinalScore);
         tvStarsEarned = findViewById(R.id.tvStarsEarned);
         tvPromotionMsg = findViewById(R.id.tvPromotionMsg);
+        tvGraduationMsg = findViewById(R.id.tvGraduationMsg);
         btnDone = findViewById(R.id.btnDone);
 
         // Get data from intent
@@ -29,6 +30,7 @@ public class AssessmentResultActivity extends AppCompatActivity {
         int total = getIntent().getIntExtra("total", 0);
         int stars = getIntent().getIntExtra("stars", 0);
         boolean promoted = getIntent().getBooleanExtra("promoted", false);
+        boolean graduated = getIntent().getBooleanExtra("graduated", false);
         String nextGrade = getIntent().getStringExtra("next_grade");
 
         tvFinalScore.setText(getString(R.string.score_label, score + "/" + total));
@@ -39,6 +41,13 @@ public class AssessmentResultActivity extends AppCompatActivity {
             tvPromotionMsg.setText("Congratulations! You are promoted to " + nextGrade + "!");
         } else {
             tvPromotionMsg.setVisibility(View.GONE);
+        }
+
+        if (graduated) {
+            tvGraduationMsg.setVisibility(View.VISIBLE);
+            ConfettiView.show(this);
+        } else {
+            tvGraduationMsg.setVisibility(View.GONE);
         }
 
         btnDone.setOnClickListener(v -> {
