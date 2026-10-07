@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Antenna -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,28 L56,28 L56,37 L52,37 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,21.5 A4.5,4.5 0 1,1 54,30.5 A4.5,4.5 0 1,1 54,21.5 Z" />
+
+    <!-- Head with face window cutout -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M40,33 L68,33 Q81,33 81,46 L81,66 Q81,79 68,79 L40,79 Q27,79 27,66 L27,46 Q27,33 40,33 Z M42,41 L66,41 Q74,41 74,49 L74,63 Q74,71 66,71 L42,71 Q34,71 34,63 L34,49 Q34,41 42,41 Z" />
+
+    <!-- Star badge -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M75,29.5 L76.7,33.65 L81.18,33.99 L77.76,36.9 L78.82,41.26 L75,38.9 L71.18,41.26 L72.24,36.9 L68.82,33.99 L73.3,33.65 Z" />
+</vector>
