@@ -28,6 +28,15 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tvAvatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤖"
+                    android:textSize="56sp"
+                    android:layout_marginBottom="4dp"
+                    android:contentDescription="My Avatar" />
+
+                <TextView
                     android:id="@+id/tvWelcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,6 +151,16 @@
                 app:cornerRadius="16dp"/>
 
         </GridLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAvatarShop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="🛍️ Avatar Shop"
+            app:backgroundTint="#009688"
+            app:cornerRadius="16dp"
+            android:textAllCaps="false"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnProfile"

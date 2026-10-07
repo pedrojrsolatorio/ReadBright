@@ -320,6 +320,7 @@ public class PhonicsActivity extends AppCompatActivity {
             getSharedPreferences("UserDatabase", MODE_PRIVATE).edit()
                     .putBoolean(username + "_phonics_" + userGrade + "_completed", true).apply();
             starsAwarded = true;
+            Toast.makeText(this, getString(R.string.phonics_completed_msg), Toast.LENGTH_LONG).show();
         }
     }
 

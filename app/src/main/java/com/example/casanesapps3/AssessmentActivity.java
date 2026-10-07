@@ -335,6 +335,8 @@ public class AssessmentActivity extends AppCompatActivity {
         double percentage = ((double) score / questionList.size()) * 100;
         boolean promoted = false;
         boolean graduated = false;
+        int bonusEarned = 0;
+        int gradBonusEarned = 0;
         String nextGrade = "";
 
         if (percentage >= 80) { // Passing score is 80%
@@ -354,6 +356,23 @@ public class AssessmentActivity extends AppCompatActivity {
                 editor.putString(username + "_grade", nextGrade);
                 editor.apply();
             }
+
+            // One-time first-pass bonus: +100 stars (once per grade)
+            SharedPreferences prefs = getSharedPreferences("UserDatabase", MODE_PRIVATE);
+            String passKey = username + "_assessment_" + currentGrade + "_passed";
+            if (!prefs.getBoolean(passKey, false)) {
+                dbHelper.addStars(username, 100);
+                prefs.edit().putBoolean(passKey, true).apply();
+                bonusEarned += 100;
+            }
+
+            // One-time graduation bonus: +500 stars (Grade 6 first pass only)
+            if (graduated && !prefs.getBoolean(username + "_graduated_bonus", false)) {
+                dbHelper.addStars(username, 500);
+                prefs.edit().putBoolean(username + "_graduated_bonus", true).apply();
+                bonusEarned += 500;
+                gradBonusEarned = 500;
+            }
         }
 
         Intent intent = new Intent(this, AssessmentResultActivity.class);
@@ -362,6 +381,8 @@ public class AssessmentActivity extends AppCompatActivity {
         intent.putExtra("stars", starsEarned);
         intent.putExtra("promoted", promoted);
         intent.putExtra("graduated", graduated);
+        intent.putExtra("bonus", bonusEarned);
+        intent.putExtra("grad_bonus", gradBonusEarned);
         intent.putExtra("next_grade", nextGrade);
         startActivity(intent);
         finish();

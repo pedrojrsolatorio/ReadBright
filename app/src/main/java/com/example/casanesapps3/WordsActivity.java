@@ -277,6 +277,7 @@ public class WordsActivity extends AppCompatActivity {
             getSharedPreferences("UserDatabase", MODE_PRIVATE).edit()
                     .putBoolean(username + "_words_" + userGrade + "_completed", true).apply();
             starsAwarded = true;
+            Toast.makeText(this, getString(R.string.words_completed_msg), Toast.LENGTH_LONG).show();
         }
     }
 

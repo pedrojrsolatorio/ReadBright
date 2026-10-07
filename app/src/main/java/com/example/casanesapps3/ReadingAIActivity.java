@@ -202,16 +202,30 @@ public class ReadingAIActivity extends AppCompatActivity {
         }
     }
 
+    // +1 star per mastered word, capped at 40 per grade
+    private boolean awardPracticeStars() {
+        SharedPreferences prefs = getSharedPreferences("UserDatabase", MODE_PRIVATE);
+        String key = username + "_reading_ai_" + userGrade + "_earned";
+        int earned = prefs.getInt(key, 0);
+        if (earned < 40) {
+            DatabaseHelper.getInstance(this).addStars(username, 1);
+            prefs.edit().putInt(key, earned + 1).apply();
+            return true;
+        }
+        return false;
+    }
+
     private void checkSpeech(String spoken) {
         String target = words[index].toLowerCase().trim();
         String result = spoken.toLowerCase().trim();
 
         if (result.equalsIgnoreCase(target) || result.contains(target)) {
-            tvFeedback.setText("Excellent!");
             tvFeedback.setTextColor(Color.parseColor("#2E7D32"));
 
             // MASTERED: Will never cycle back
             wordEngine.markWordCompleted(words[index]);
+            boolean bonusStar = awardPracticeStars();
+            tvFeedback.setText(bonusStar ? "Excellent! \u2B50 +1" : "Excellent!");
 
             ConfettiView.show(this, tts);
 

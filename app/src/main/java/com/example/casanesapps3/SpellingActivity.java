@@ -150,12 +150,13 @@ public class SpellingActivity extends AppCompatActivity {
     private void checkAnswer() {
         String answer = new String(userGuess);
         if (answer.equalsIgnoreCase(currentTargetWord)) {
-            tvFeedback.setText("Correct!");
             tvFeedback.setTextColor(Color.parseColor("#388E3C"));
             score++;
             
             // MASTERED: Save to DB so it never repeats
             spellingEngine.markWordCompleted(wordList.get(currentIndex));
+            boolean bonusStar = awardPracticeStars();
+            tvFeedback.setText(bonusStar ? "Correct! \u2B50 +1" : "Correct!");
 
             ConfettiView.show(this, textToSpeech);
             
@@ -173,6 +174,19 @@ public class SpellingActivity extends AppCompatActivity {
             refreshKeyboardButtons();
             renderAnswerSlots();
         }
+    }
+
+    // +1 star per correct spelling, capped at 50 per grade
+    private boolean awardPracticeStars() {
+        SharedPreferences prefs = getSharedPreferences("UserDatabase", MODE_PRIVATE);
+        String key = username + "_spelling_" + userGrade + "_earned";
+        int earned = prefs.getInt(key, 0);
+        if (earned < 50) {
+            dbHelper.addStars(username, 1);
+            prefs.edit().putInt(key, earned + 1).apply();
+            return true;
+        }
+        return false;
     }
 
     private void updateWordImage() {

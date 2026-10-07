@@ -52,6 +52,7 @@
         <activity android:name=".SpellingActivity" />
         <activity android:name=".AssessmentActivity" />
         <activity android:name=".AssessmentResultActivity" />
+        <activity android:name=".AvatarShopActivity" />
 
     </application>
 

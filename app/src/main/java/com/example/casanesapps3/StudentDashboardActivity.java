@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentDashboardActivity extends AppCompatActivity {
 
-    private TextView tvWelcome, tvGrade, tvStars;
+    private TextView tvWelcome, tvGrade, tvStars, tvAvatar;
     private DatabaseHelper dbHelper;
     private String username;
     private String userGrade;
@@ -27,6 +27,7 @@ public class StudentDashboardActivity extends AppCompatActivity {
         tvWelcome = findViewById(R.id.tvWelcome);
         tvGrade = findViewById(R.id.tvGrade);
         tvStars = findViewById(R.id.tvStars);
+        tvAvatar = findViewById(R.id.tvAvatar);
 
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
         username = preferences.getString("current_user", "");
@@ -48,6 +49,10 @@ public class StudentDashboardActivity extends AppCompatActivity {
         findViewById(R.id.btnSpelling).setOnClickListener(v -> startModule(SpellingActivity.class));
         findViewById(R.id.btnReadingAI).setOnClickListener(v -> startModule(ReadingAIActivity.class));
         findViewById(R.id.btnAssessment).setOnClickListener(v -> startModule(AssessmentActivity.class));
+
+        findViewById(R.id.btnAvatarShop).setOnClickListener(v -> {
+            startActivity(new Intent(this, AvatarShopActivity.class));
+        });
 
         findViewById(R.id.btnProfile).setOnClickListener(v -> {
             Intent intent = new Intent(this, StudentProfileActivity.class);
@@ -72,6 +77,7 @@ public class StudentDashboardActivity extends AppCompatActivity {
             tvWelcome.setText("Welcome, " + name + "!");
             tvGrade.setText("Level: " + userGrade);
             tvStars.setText("Stars: " + stars);
+            tvAvatar.setText(AvatarShopActivity.getEquippedAvatar(this, username));
             
             // Save current grade to SharedPreferences to ensure engine consistency
             getSharedPreferences("UserDatabase", MODE_PRIVATE).edit()

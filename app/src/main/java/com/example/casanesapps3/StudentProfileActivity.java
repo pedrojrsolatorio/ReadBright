@@ -13,6 +13,7 @@ public class StudentProfileActivity extends AppCompatActivity {
 
     private TextView tvProfileName, tvProfileGrade, tvProfileStars;
     private TextView tvProfileBirthday, tvProfileGender, tvProfileAge;
+    private TextView tvAvatar;
     private TextView tvStatusAlphabet, tvStatusPhonics, tvStatusWords, tvStatusSentences, tvStatusStories;
     private Button btnBackProfile;
     private DatabaseHelper dbHelper;
@@ -26,6 +27,7 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         // Initialize Views
         tvProfileName = findViewById(R.id.tvProfileName);
+        tvAvatar = findViewById(R.id.tvAvatar);
         tvProfileGrade = findViewById(R.id.tvProfileGrade);
         tvProfileStars = findViewById(R.id.tvProfileStars);
         tvProfileBirthday = findViewById(R.id.tvProfileBirthday);
@@ -55,6 +57,8 @@ public class StudentProfileActivity extends AppCompatActivity {
             String gender = "N/A";
             int age = 0;
             int stars = 0;
+
+            tvAvatar.setText(AvatarShopActivity.getEquippedAvatar(this, username));
 
             // Fetch from SQLite database
             Cursor cursor = dbHelper.getUser(username);

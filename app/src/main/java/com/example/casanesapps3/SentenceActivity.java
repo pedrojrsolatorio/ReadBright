@@ -251,6 +251,7 @@ public class SentenceActivity extends AppCompatActivity {
             getSharedPreferences("UserDatabase", MODE_PRIVATE).edit()
                     .putBoolean(username + "_sentences_" + userGrade + "_completed", true).apply();
             starsAwarded = true;
+            Toast.makeText(this, getString(R.string.sentences_completed_msg), Toast.LENGTH_LONG).show();
         }
     }
 

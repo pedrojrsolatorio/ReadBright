@@ -85,7 +85,8 @@
     <string name="sentences_title">Sentences - %1$s</string>
     <string name="excellent_reading">Excellent Reading! ⭐</string>
     <string name="keep_trying_ai">Keep trying! Listen to the AI:</string>
-    <string name="sentences_completed_msg">Sentences Completed! ⭐ +50 Stars</string>
+    <string name="sentences_completed_msg">Sentences Completed! ⭐ +40 Stars</string>
+    <string name="words_completed_msg">Words Completed! ⭐ +50 Stars</string>
 
     <!-- Alphabet -->
     <string name="alphabet_title">Alphabet - %1$s</string>
@@ -94,7 +95,7 @@
     <!-- Phonics -->
     <string name="phonics_practice_title">Phonics Learning</string>
     <string name="phonics_title">Phonics - %1$s</string>
-    <string name="phonics_completed_msg">Phonics Completed! ⭐ +50 Stars</string>
+    <string name="phonics_completed_msg">Phonics Completed! ⭐ +30 Stars</string>
     <string name="phonics_word_placeholder">Ball</string>
 
     <!-- Words -->
