@@ -107,6 +107,17 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnStartOver"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Start Over"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#2E7D32"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"
+            android:textAllCaps="false"/>
+
+        <Button
             android:id="@+id/btnBack"
             android:layout_width="match_parent"
             android:layout_height="55dp"

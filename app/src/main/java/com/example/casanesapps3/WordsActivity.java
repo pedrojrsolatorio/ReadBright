@@ -12,6 +12,8 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.util.TypedValue;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,9 +30,10 @@ import java.util.Locale;
 public class WordsActivity extends AppCompatActivity {
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static final int SESSION_SIZE = 15;
 
     private TextView tvWord, tvFeedback;
-    private Button btnSpeak, btnMic, btnPrevious, btnNext, btnBack;
+    private Button btnSpeak, btnMic, btnPrevious, btnNext, btnBack, btnStartOver;
     private TextToSpeech tts;
     private SpeechRecognizer speechRecognizer;
     private Intent recognizerIntent;
@@ -41,6 +44,7 @@ public class WordsActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private ContinuousWordEngine wordEngine; 
     private boolean starsAwarded = false;
+    private int sessionMastered = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class WordsActivity extends AppCompatActivity {
         btnPrevious = findViewById(R.id.btnPrevious);
         btnNext = findViewById(R.id.btnNext);
         btnBack = findViewById(R.id.btnBack);
+        btnStartOver = findViewById(R.id.btnStartOver);
 
         SharedPreferences preferences = getSharedPreferences("UserDatabase", MODE_PRIVATE);
         username = preferences.getString("current_user", "");
@@ -103,7 +108,7 @@ public class WordsActivity extends AppCompatActivity {
                 index++;
                 updateUI();
             } else {
-                setupWordsList();
+                setCompletedState();
             }
         });
 
@@ -116,36 +121,63 @@ public class WordsActivity extends AppCompatActivity {
             });
         }
 
+        if (btnStartOver != null) {
+            btnStartOver.setOnClickListener(v -> {
+                wordEngine.clearProgress();
+                setupWordsList();
+            });
+        }
+
         btnBack.setOnClickListener(v -> finish());
     }
 
     private void setupWordsList() {
-        // Fetch 50 words at a time, prioritized by fresh content
-        List<String> freshWords = wordEngine.getNextWords(50);
+        // Fetch one finite session's worth of words
+        List<String> freshWords = wordEngine.getNextWords(SESSION_SIZE);
         words = freshWords.toArray(new String[0]);
 
         index = 0;
+        sessionMastered = 0;
 
         if (words.length == 0) {
-            tvWord.setText("Great Job!");
-            Toast.makeText(this, "You have mastered all available words!", Toast.LENGTH_LONG).show();
-            setNavEnabled(false);
+            setCompletedState();
             return;
         }
 
-        setNavEnabled(true);
+        setActiveState();
+    }
+
+    private void setActiveState() {
+        if (btnSpeak != null) btnSpeak.setEnabled(true);
+        if (btnMic != null) btnMic.setEnabled(true);
+        if (btnStartOver != null) btnStartOver.setVisibility(View.GONE);
         updateUI();
     }
 
-    private void setNavEnabled(boolean enabled) {
-        if (btnNext != null) btnNext.setEnabled(enabled);
-        if (btnPrevious != null) btnPrevious.setEnabled(enabled);
+    private void setCompletedState() {
+        if (tvWord != null) {
+            tvWord.setText("\uD83C\uDF89 All Mastered! \uD83C\uDF89");
+            tvWord.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
+            tvWord.setTextColor(Color.parseColor("#1B5E20"));
+        }
+        if (tvFeedback != null) {
+            tvFeedback.setText("You mastered " + sessionMastered + " of " + SESSION_SIZE + " words! \u2B50");
+            tvFeedback.setTextColor(Color.parseColor("#2E7D32"));
+        }
+        if (btnSpeak != null) btnSpeak.setEnabled(false);
+        if (btnMic != null) btnMic.setEnabled(false);
+        if (btnPrevious != null) btnPrevious.setEnabled(false);
+        if (btnNext != null) btnNext.setEnabled(false);
+        if (btnStartOver != null) btnStartOver.setVisibility(View.VISIBLE);
     }
 
     private void updateUI() {
         if (words == null || words.length == 0 || index >= words.length) return;
         tvWord.setText(words[index]);
+        tvWord.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+        tvWord.setTextColor(Color.parseColor("#2E7D32"));
         if (tvFeedback != null) tvFeedback.setText("");
+        if (tvFeedback != null) tvFeedback.setTextColor(Color.parseColor("#2E7D32"));
         
         // Mark as seen immediately when shown
         wordEngine.markWordAsSeen(words[index]);
@@ -215,6 +247,8 @@ public class WordsActivity extends AppCompatActivity {
         if (spoken.equalsIgnoreCase(targetWord) || spoken.contains(targetWord)) {
             tvFeedback.setText(R.string.excellent_status);
             tvFeedback.setTextColor(Color.parseColor("#2E7D32"));
+
+            sessionMastered++;
             
             // MASTERED: Move to history (Never show again)
             wordEngine.markWordCompleted(words[index]);
@@ -227,7 +261,7 @@ public class WordsActivity extends AppCompatActivity {
                     updateUI();
                 } else {
                     awardCompletionStars();
-                    setupWordsList();
+                    setCompletedState();
                 }
             }, 1500);
             
