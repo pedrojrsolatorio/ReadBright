@@ -304,7 +304,7 @@ public class SpellingActivity extends AppCompatActivity {
     }
 
     private void removeLetterFromGuess(int index) {
-        if ("Correct!".equals(tvFeedback.getText().toString())) return;
+        if (tvFeedback.getText().toString().startsWith("Correct!")) return;
         if (index < 0 || index >= userGuess.length || userGuess[index] == ' ') return;
         char c = userGuess[index];
         userGuess[index] = ' ';
@@ -346,16 +346,35 @@ public class SpellingActivity extends AppCompatActivity {
             recognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US);
+            recognizerIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say a letter");
             speechRecognizer.setRecognitionListener(new RecognitionListener() {
                 @Override public void onReadyForSpeech(Bundle params) { tvFeedback.setText("Listening..."); }
                 @Override public void onResults(Bundle results) {
                     ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                    if (matches != null && !matches.isEmpty()) {
-                        String spoken = matches.get(0).toUpperCase().trim();
-                        if (spoken.equals(currentTargetWord)) {
-                            for (int i = 0; i < currentTargetWord.length(); i++) userGuess[i] = currentTargetWord.charAt(i);
-                            renderAnswerSlots(); checkAnswer();
+                    int pos = -1;
+                    for (int i = 0; i < userGuess.length; i++) {
+                        if (userGuess[i] == ' ') { pos = i; break; }
+                    }
+                    char expected = (pos >= 0 && pos < currentTargetWord.length()) ? currentTargetWord.charAt(pos) : '\0';
+                    boolean filled = false;
+                    if (matches != null && expected != '\0') {
+                        for (String cand : matches) {
+                            if (cand == null) continue;
+                            String letters = cand.toUpperCase().replaceAll("[^A-Z]", "");
+                            if (letters.isEmpty()) continue;
+                            if (letters.equals("EYE")) letters = "I";
+                            if (letters.charAt(0) == expected || letters.charAt(letters.length() - 1) == expected) {
+                                addLetterToGuess(expected);
+                                filled = userGuess[pos] == expected;
+                                break;
+                            }
                         }
+                    }
+                    if (filled) {
+                        if ("Listening...".equals(tvFeedback.getText().toString())) tvFeedback.setText("");
+                    } else if (expected != '\0') {
+                        tvFeedback.setText("Try again!");
+                        tvFeedback.setTextColor(Color.RED);
                     }
                 }
                 @Override public void onError(int error) { 
