@@ -1,4 +1,4 @@
-package com.example.casanesapps3;
+package com.readbright.app;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.casanesapps3", appContext.getPackageName());
+        assertEquals("com.readbright.app", appContext.getPackageName());
     }
 }

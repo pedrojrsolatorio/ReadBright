@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.casanesapps3"
+    namespace = "com.readbright.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.casanesapps3"
+        applicationId = "com.readbright.app"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

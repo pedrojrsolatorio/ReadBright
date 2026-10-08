@@ -1,4 +1,4 @@
-package com.example.casanesapps3;
+package com.readbright.app;
 
 import android.Manifest;
 import android.app.AlertDialog;

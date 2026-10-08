@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AI-SRS</string>
+    <string name="app_name">ReadBright</string>
 
     <!-- Shared -->
     <string name="back">Back</string>
@@ -61,8 +61,8 @@
     <string name="logout_session_btn">Logout Session</string>
     <string name="back_to_home_btn">Back to Home</string>
 
-    <!-- AI-Learn Stylized Strings -->
-    <string name="ai_learn">AI-LEARN</string>
+    <!-- ReadBright Stylized Strings -->
+    <string name="ai_learn">ReadBright</string>
     <string name="read_spell_grow">Read • Spell • Grow</string>
     <string name="motto">Personalized Learning\nfor a Brighter Future</string>
     <string name="get_started">Get Started</string>

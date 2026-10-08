@@ -1,4 +1,4 @@
-package com.example.casanesapps3;
+package com.readbright.app;
 
 public class Question {
     public static final int TYPE_READING = 0;

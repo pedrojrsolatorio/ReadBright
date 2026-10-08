@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "casanesapps3"
+rootProject.name = "ReadBright"
 include(":app")
  
